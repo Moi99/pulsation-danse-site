@@ -427,29 +427,36 @@ body.nav-open .menu-toggle span:nth-child(3) {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: min(70vw, 32rem);
-  padding: clamp(1rem, 3vw, 1.8rem);
-  border-radius: var(--radius-l);
-  background:
-    radial-gradient(circle at center, rgba(201, 151, 117, 0.16), transparent 55%),
-    linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.015));
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: var(--shadow-deep);
+  min-height: min(82vw, 42rem);
+  padding: 0;
+  overflow: visible;
 }
 
 .hero-emblem::before {
   content: "";
   position: absolute;
-  inset: 10%;
+  width: min(120%, 44rem);
+  height: min(64vw, 24rem);
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 246, 240, 0.12), transparent 65%);
-  filter: blur(12px);
+  background: radial-gradient(ellipse at center, rgba(255, 246, 240, 0.34) 0%, rgba(226, 197, 177, 0.24) 30%, rgba(181, 123, 134, 0.16) 54%, transparent 76%);
+  filter: blur(34px);
+}
+
+.hero-emblem::after {
+  content: "";
+  position: absolute;
+  width: min(82%, 28rem);
+  height: min(46vw, 16rem);
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(255, 248, 241, 0.22) 0%, rgba(255, 248, 241, 0.08) 46%, transparent 74%);
+  filter: blur(44px);
 }
 
 .hero-emblem__logo {
   position: relative;
   z-index: 1;
-  width: min(100%, 32rem);
+  width: min(150%, 48rem);
+  max-width: none;
   height: auto;
   filter: drop-shadow(0 18px 32px rgba(0, 0, 0, 0.34));
 }
@@ -1087,7 +1094,7 @@ select:focus-visible {
   }
 
   .hero-emblem__logo {
-    width: min(100%, 24rem);
+    width: min(135%, 30rem);
   }
 
   .stats-grid,
