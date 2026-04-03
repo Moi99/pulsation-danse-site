@@ -8,7 +8,7 @@ const navLinks = document.querySelectorAll(".site-nav a");
 const yearTargets = document.querySelectorAll("[data-year]");
 const form = document.querySelector("[data-placeholder-form]");
 const formNote = document.querySelector("[data-form-note]");
-const glowSurfaces = document.querySelectorAll(".section--dark, .site-footer");
+const glowSurfaces = document.querySelectorAll(".hero, .section--dark, .site-footer");
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
 const lerp = (start, end, amount) => start + (end - start) * amount;
