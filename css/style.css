@@ -619,6 +619,10 @@ body.nav-open .menu-toggle span:nth-child(3) {
   text-transform: uppercase;
 }
 
+.feature-card .card-tag {
+  margin-bottom: 1.3rem;
+}
+
 .feature-card--dark,
 .pricing-card,
 .pillar-card {
@@ -721,6 +725,13 @@ body.nav-open .menu-toggle span:nth-child(3) {
     linear-gradient(145deg, #2d232b, #121012);
 }
 
+.placeholder-media--group {
+  background:
+    linear-gradient(160deg, rgba(181, 123, 134, 0.24), transparent 42%),
+    radial-gradient(circle at top center, rgba(255, 247, 240, 0.16), transparent 30%),
+    linear-gradient(145deg, #5a3f45, #171315);
+}
+
 .placeholder-media--quote,
 .placeholder-media--portrait,
 .placeholder-media--contact,
@@ -759,6 +770,35 @@ body.nav-open .menu-toggle span:nth-child(3) {
 .split-panel__content,
 .style-block__content {
   padding: clamp(0.3rem, 1vw, 0.6rem);
+}
+
+.teaching-panel {
+  padding: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+.teaching-panel .split-panel__content {
+  padding: clamp(0.2rem, 1vw, 0.4rem) 0;
+}
+
+.teaching-panel .eyebrow {
+  margin-bottom: 1.45rem;
+}
+
+.teaching-panel .split-panel__content p:last-of-type {
+  max-width: 38rem;
+  color: var(--text-muted);
+}
+
+.teaching-panel .split-panel__media {
+  min-height: 24rem;
+  border-radius: calc(var(--radius-m) - 6px);
+}
+
+.teaching-panel__cta {
+  margin-top: clamp(2rem, 4vw, 3rem);
 }
 
 .split-panel--reverse .split-panel__media,
