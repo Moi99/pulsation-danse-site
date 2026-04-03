@@ -8,6 +8,10 @@ const navLinks = document.querySelectorAll(".site-nav a");
 const yearTargets = document.querySelectorAll("[data-year]");
 const form = document.querySelector("[data-placeholder-form]");
 const formNote = document.querySelector("[data-form-note]");
+const glowSurfaces = document.querySelectorAll(".section--dark, .site-footer");
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+const lerp = (start, end, amount) => start + (end - start) * amount;
 
 const closeMenu = () => {
   if (!menuToggle || !siteNav) {
@@ -55,7 +59,68 @@ if (form && formNote) {
   });
 }
 
-if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+let glowFrame = 0;
+
+const syncGlowParallax = () => {
+  glowFrame = 0;
+
+  if (!glowSurfaces.length) {
+    return;
+  }
+
+  if (prefersReducedMotion.matches) {
+    glowSurfaces.forEach((surface) => {
+      surface.style.setProperty("--glow-left-x", "0px");
+      surface.style.setProperty("--glow-left-y", "0px");
+      surface.style.setProperty("--glow-right-x", "0px");
+      surface.style.setProperty("--glow-right-y", "0px");
+    });
+    return;
+  }
+
+  const viewportHeight = window.innerHeight || 1;
+
+  glowSurfaces.forEach((surface) => {
+    const rect = surface.getBoundingClientRect();
+    const passage = viewportHeight + rect.height;
+    const progress = clamp((viewportHeight - rect.top) / passage, 0, 1);
+    const centered = progress * 2 - 1;
+    const arc = Math.sin(progress * Math.PI);
+    const travelY = passage * 1.05;
+    const leftY = lerp(-travelY, travelY, progress);
+    const rightY = lerp(-travelY * 0.66, travelY * 0.9, progress) - arc * 70;
+    const leftX = centered * 168;
+    const rightX = centered * -129 + arc * 78;
+
+    surface.style.setProperty("--glow-left-x", `${leftX}px`);
+    surface.style.setProperty("--glow-left-y", `${leftY}px`);
+    surface.style.setProperty("--glow-right-x", `${rightX}px`);
+    surface.style.setProperty("--glow-right-y", `${rightY}px`);
+  });
+};
+
+const queueGlowParallax = () => {
+  if (!glowSurfaces.length || glowFrame) {
+    return;
+  }
+
+  glowFrame = window.requestAnimationFrame(syncGlowParallax);
+};
+
+if (glowSurfaces.length) {
+  queueGlowParallax();
+
+  window.addEventListener("scroll", queueGlowParallax, { passive: true });
+  window.addEventListener("resize", queueGlowParallax);
+
+  if (typeof prefersReducedMotion.addEventListener === "function") {
+    prefersReducedMotion.addEventListener("change", queueGlowParallax);
+  } else if (typeof prefersReducedMotion.addListener === "function") {
+    prefersReducedMotion.addListener(queueGlowParallax);
+  }
+}
+
+if ("IntersectionObserver" in window && !prefersReducedMotion.matches) {
   const revealedElements = document.querySelectorAll("[data-reveal]");
 
   if (revealedElements.length) {
