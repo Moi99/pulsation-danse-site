@@ -641,6 +641,21 @@ body.nav-open .menu-toggle span:nth-child(3) {
   margin-bottom: 1.3rem;
 }
 
+.style-block .card-tag {
+  margin-bottom: 1.45rem;
+  padding: 0.52rem 0.9rem;
+  border: 1px solid rgba(92, 39, 56, 0.16);
+  background: rgba(92, 39, 56, 0.12);
+  box-shadow: 0 12px 24px rgba(26, 16, 20, 0.08);
+}
+
+.section--dark .style-block .card-tag {
+  border-color: rgba(226, 197, 177, 0.22);
+  background: rgba(248, 241, 235, 0.1);
+  color: var(--accent-copper-light);
+  box-shadow: 0 14px 28px rgba(6, 4, 6, 0.2);
+}
+
 .feature-card--dark,
 .pricing-card,
 .pillar-card {
@@ -826,6 +841,14 @@ body.nav-open .menu-toggle span:nth-child(3) {
 .teaching-panel .split-panel__content p:last-of-type {
   max-width: 38rem;
   color: var(--text-muted);
+}
+
+.section--dark .teaching-panel .split-panel__content {
+  color: var(--text-light);
+}
+
+.section--dark .teaching-panel .split-panel__content p:last-of-type {
+  color: var(--text-muted-light);
 }
 
 .teaching-panel .split-panel__media {
