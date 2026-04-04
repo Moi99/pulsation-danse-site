@@ -9,9 +9,17 @@ const yearTargets = document.querySelectorAll("[data-year]");
 const form = document.querySelector("[data-placeholder-form]");
 const formNote = document.querySelector("[data-form-note]");
 const glowSurfaces = document.querySelectorAll(".hero, .section--dark, .site-footer");
+const videoModal = document.querySelector("[data-video-modal]");
+const videoTriggers = document.querySelectorAll("[data-video-trigger]");
+const videoCloseControls = document.querySelectorAll("[data-video-close]");
+const videoStyleName = document.querySelector("[data-video-style-name]");
+const videoPlaceholderLabel = document.querySelector("[data-video-placeholder-label]");
+const videoModalTitle = document.querySelector("#video-modal-title");
+const videoModalCloseButton = document.querySelector(".video-modal__close");
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
 const lerp = (start, end, amount) => start + (end - start) * amount;
+let lastVideoTrigger = null;
 
 const closeMenu = () => {
   if (!menuToggle || !siteNav) {
@@ -56,6 +64,59 @@ if (form && formNote) {
   form.addEventListener("submit", (event) => {
     event.preventDefault();
     formNote.textContent = "Le formulaire de cette V1 est en attente de l'adresse courriel finale et de son integration.";
+  });
+}
+
+const closeVideoModal = () => {
+  if (!videoModal) {
+    return;
+  }
+
+  videoModal.hidden = true;
+  body.classList.remove("modal-open");
+
+  if (lastVideoTrigger) {
+    lastVideoTrigger.focus();
+  }
+};
+
+if (videoModal && videoTriggers.length) {
+  const openVideoModal = (trigger) => {
+    const styleName = trigger.dataset.videoStyle || "ce style";
+
+    if (videoModalTitle) {
+      videoModalTitle.textContent = styleName;
+    }
+
+    if (videoStyleName) {
+      videoStyleName.textContent = styleName;
+    }
+
+    if (videoPlaceholderLabel) {
+      videoPlaceholderLabel.textContent = `Extrait représentatif de ${styleName} à intégrer`;
+    }
+
+    lastVideoTrigger = trigger;
+    videoModal.hidden = false;
+    body.classList.add("modal-open");
+
+    if (videoModalCloseButton) {
+      videoModalCloseButton.focus();
+    }
+  };
+
+  videoTriggers.forEach((trigger) => {
+    trigger.addEventListener("click", () => openVideoModal(trigger));
+  });
+
+  videoCloseControls.forEach((control) => {
+    control.addEventListener("click", closeVideoModal);
+  });
+
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !videoModal.hidden) {
+      closeVideoModal();
+    }
   });
 }
 
