@@ -674,6 +674,24 @@ body.nav-open .menu-toggle span:nth-child(3) {
   overflow: hidden;
 }
 
+.style-preview--link {
+  display: block;
+  color: inherit;
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+}
+
+.style-preview--link:hover,
+.style-preview--link:focus-visible {
+  transform: translateY(-8px);
+  border-color: rgba(92, 39, 56, 0.18);
+  box-shadow: 0 24px 52px rgba(18, 12, 15, 0.18);
+}
+
+.style-preview--link:focus-visible {
+  outline: 2px solid rgba(92, 39, 56, 0.34);
+  outline-offset: 4px;
+}
+
 .style-preview h3 {
   margin: 1.2rem 1.4rem 0.65rem;
   font-size: 2rem;
@@ -842,6 +860,12 @@ body.nav-open .menu-toggle span:nth-child(3) {
 
 .section--light .style-block__content {
   color: var(--text-dark);
+}
+
+#west-coast-swing,
+#zouk-bresilien,
+#blues {
+  scroll-margin-top: calc(var(--header-height) + 1.5rem);
 }
 
 .bullet-list {
