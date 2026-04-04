@@ -34,11 +34,13 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
+  overflow-x: hidden;
   font-family: "Manrope", sans-serif;
   color: var(--text-dark);
   background:
@@ -273,7 +275,7 @@ body.nav-open .menu-toggle span:nth-child(3) {
 .hero__inner {
   width: min(calc(100% - 2 * var(--gutter)), var(--content-max));
   margin: 0 auto;
-  padding: clamp(3.5rem, 8vw, 7rem) 0 var(--section-space);
+  padding: clamp(2.45rem, 5.6vw, 4.9rem) 0 calc(var(--section-space) * 0.7);
   min-height: calc(100vh - var(--header-height));
   position: relative;
   z-index: 1;
@@ -286,7 +288,7 @@ body.nav-open .menu-toggle span:nth-child(3) {
 .hero__inner--compact {
   min-height: auto;
   grid-template-columns: minmax(0, 1fr);
-  padding-bottom: clamp(4rem, 9vw, 5.5rem);
+  padding-bottom: clamp(2.8rem, 6.3vw, 3.85rem);
 }
 
 .hero h1,
@@ -460,10 +462,12 @@ body.nav-open .menu-toggle span:nth-child(3) {
 }
 
 .section--light {
+  padding-block: calc(var(--section-space) * 0.7);
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.03)), var(--surface-light);
 }
 
 .section--dark {
+  padding-block: calc(var(--section-space) * 0.7);
   color: var(--text-light);
   background:
     radial-gradient(circle at top right, rgba(201, 151, 117, 0.12), transparent 30rem),
@@ -535,13 +539,101 @@ body.nav-open .menu-toggle span:nth-child(3) {
   line-height: 0.98;
 }
 
-.section-heading p:last-child,
+.section-heading > p:not(.eyebrow):last-child,
 .section-heading__note {
   margin: 1rem 0 0;
   color: var(--text-muted);
 }
 
-.section--dark .section-heading p:last-child {
+.style-jump-list {
+  display: grid;
+  gap: 0.95rem;
+}
+
+.style-jump {
+  position: relative;
+  display: grid;
+  gap: 0.25rem;
+  padding: 1.25rem 1.35rem 1.2rem;
+  border-radius: calc(var(--radius-m) - 6px);
+  border: 1px solid rgba(92, 39, 56, 0.12);
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0.56) 42%, rgba(255, 255, 255, 0.18) 100%),
+    rgba(247, 239, 231, 0.8);
+  box-shadow: var(--shadow-soft);
+  color: inherit;
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+}
+
+.style-jump::before {
+  content: "";
+  position: absolute;
+  left: 1.15rem;
+  top: 1rem;
+  bottom: 1rem;
+  width: 3px;
+  border-radius: 999px;
+  opacity: 0.9;
+}
+
+.style-jump:hover,
+.style-jump:focus-visible {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 52px rgba(18, 12, 15, 0.16);
+}
+
+.style-jump:focus-visible {
+  outline: 2px solid rgba(92, 39, 56, 0.34);
+  outline-offset: 4px;
+}
+
+.style-jump__name {
+  padding-left: 1rem;
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(2.1rem, 5vw, 3.2rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+
+.style-jump__meta {
+  padding-left: 1rem;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.style-jump--wcs::before {
+  background: linear-gradient(180deg, rgba(201, 151, 117, 0.98), rgba(181, 123, 134, 0.64));
+}
+
+.style-jump--wcs {
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.68) 22%, rgba(201, 151, 117, 0.52) 100%),
+    rgba(247, 239, 231, 0.82);
+}
+
+.style-jump--zouk::before {
+  background: linear-gradient(180deg, rgba(181, 123, 134, 0.96), rgba(132, 98, 105, 0.72));
+}
+
+.style-jump--zouk {
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.68) 22%, rgba(181, 123, 134, 0.36) 100%),
+    rgba(247, 239, 231, 0.82);
+}
+
+.style-jump--blues::before {
+  background: linear-gradient(180deg, rgba(92, 39, 56, 0.96), rgba(36, 27, 31, 0.64));
+}
+
+.style-jump--blues {
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.68) 22%, rgba(92, 39, 56, 0.46) 100%),
+    rgba(247, 239, 231, 0.82);
+}
+
+.section--dark .section-heading > p:not(.eyebrow):last-child {
   color: var(--text-muted-light);
 }
 
@@ -943,6 +1035,7 @@ body.nav-open .menu-toggle span:nth-child(3) {
   color: var(--text-dark);
 }
 
+#styles-de-danse,
 #west-coast-swing,
 #zouk-bresilien,
 #blues {
