@@ -652,9 +652,27 @@ body.nav-open .menu-toggle span:nth-child(3) {
   margin: 0 auto;
 }
 
+.section--scroll-stage {
+  overflow: clip;
+  --scroll-stage-shift: 0px;
+}
+
+.section__inner--scroll-stage {
+  position: relative;
+  z-index: 1;
+  transform: translate3d(0, var(--scroll-stage-shift), 0);
+  will-change: transform;
+}
+
 .section--light {
   padding-block: calc(var(--section-space) * 0.7);
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.03)), var(--surface-light);
+}
+
+@supports not (overflow: clip) {
+  .section--scroll-stage {
+    overflow: hidden;
+  }
 }
 
 .section--dark {
@@ -1884,5 +1902,10 @@ select:focus-visible {
   [data-reveal] {
     opacity: 1;
     transform: none;
+  }
+
+  .section__inner--scroll-stage {
+    transform: none;
+    will-change: auto;
   }
 }
