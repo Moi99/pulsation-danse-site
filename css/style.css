@@ -1110,6 +1110,47 @@ body.nav-open .menu-toggle span:nth-child(3) {
   background: rgba(255, 255, 255, 0.72);
 }
 
+.schedule-card__header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.schedule-card__header .card-tag {
+  margin: 0;
+  padding: 0.64rem 1.05rem;
+  font-size: 0.9rem;
+}
+
+.schedule-card__subtitle {
+  margin: 0;
+  font-size: 0.92rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-plum);
+}
+
+.section--dark .schedule-card {
+  color: var(--text-light);
+  background: linear-gradient(180deg, rgba(39, 27, 34, 0.98), rgba(27, 20, 23, 0.98));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: var(--shadow-deep);
+}
+
+.section--dark .schedule-card .card-tag {
+  border-color: rgba(226, 197, 177, 0.22);
+  background: rgba(248, 241, 235, 0.12);
+  color: var(--accent-copper-light);
+  box-shadow: 0 14px 28px rgba(6, 4, 6, 0.2);
+}
+
+.section--dark .schedule-card__subtitle {
+  color: var(--accent-copper-light);
+}
+
 .meta-list {
   display: grid;
   gap: 0.7rem;
@@ -1128,12 +1169,38 @@ body.nav-open .menu-toggle span:nth-child(3) {
   color: var(--text-dark);
 }
 
+.section--dark .schedule-card .meta-list li {
+  color: var(--text-muted-light);
+}
+
+.section--dark .schedule-card .meta-list strong {
+  color: var(--text-light);
+}
+
 .pricing-grid {
   margin-top: 2rem;
 }
 
 .pricing-card {
   padding: 1.8rem;
+}
+
+.section--light .pricing-card {
+  color: var(--text-dark);
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(70, 52, 60, 0.08);
+  box-shadow: var(--shadow-soft);
+}
+
+.section--light .pricing-card .card-tag {
+  border-color: rgba(92, 39, 56, 0.16);
+  background: rgba(92, 39, 56, 0.12);
+  color: var(--accent-plum);
+  box-shadow: 0 12px 24px rgba(26, 16, 20, 0.08);
+}
+
+.section--light .pricing-card .price-placeholder {
+  color: var(--accent-plum);
 }
 
 .price-placeholder {
