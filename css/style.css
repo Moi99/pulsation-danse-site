@@ -306,8 +306,16 @@ body.nav-open .menu-toggle span:nth-child(3) {
 
 .hero h1 {
   margin: 0 0 1rem;
-  font-size: clamp(3rem, 8vw, 5.8rem);
+  font-size: clamp(2.7rem, 7.2vw, 5.22rem);
   line-height: 0.94;
+}
+
+.hero-home-title__line {
+  display: block;
+}
+
+.hero-home-title__line--nowrap {
+  white-space: nowrap;
 }
 
 .hero__copy {
@@ -419,198 +427,6 @@ body.nav-open .menu-toggle span:nth-child(3) {
 .hero__visual {
   position: relative;
   z-index: 1;
-}
-
-.hero__inner--home {
-  grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
-  gap: clamp(2.5rem, 6vw, 5.5rem);
-}
-
-.hero__brand-lockup {
-  display: grid;
-  gap: 0.85rem;
-  margin-bottom: 1.3rem;
-}
-
-.hero__mark {
-  width: clamp(9.5rem, 18vw, 13.5rem);
-  height: auto;
-  filter: drop-shadow(0 14px 26px rgba(0, 0, 0, 0.28));
-}
-
-.hero__inner--home .hero__copy {
-  max-width: 35rem;
-}
-
-.hero__inner--home .lead {
-  max-width: 31rem;
-  font-size: 1.02rem;
-}
-
-.hero__visual--home {
-  display: flex;
-  justify-content: flex-end;
-  align-self: stretch;
-}
-
-.hero-collage {
-  position: relative;
-  width: min(100%, 39rem);
-  min-height: clamp(29rem, 50vw, 43rem);
-  margin-left: auto;
-  padding: clamp(0.75rem, 2vw, 1.5rem) 0 clamp(2rem, 4vw, 3rem) clamp(1.4rem, 4vw, 3rem);
-}
-
-.hero-collage::before {
-  content: "";
-  position: absolute;
-  inset: 12% 7% 6% 12%;
-  border-radius: 45% 55% 48% 52% / 42% 46% 54% 58%;
-  background:
-    radial-gradient(circle at 30% 28%, rgba(255, 247, 240, 0.28), transparent 22%),
-    radial-gradient(circle at 82% 26%, rgba(181, 123, 134, 0.3), transparent 24%),
-    linear-gradient(145deg, rgba(92, 39, 56, 0.42), rgba(26, 20, 23, 0.08));
-  transform: rotate(-8deg);
-  opacity: 0.9;
-}
-
-.hero-collage::after {
-  content: "";
-  position: absolute;
-  inset: 7% 5% 1% 24%;
-  border-radius: 40% 60% 58% 42% / 56% 42% 58% 44%;
-  border: 1px solid rgba(255, 247, 240, 0.14);
-  opacity: 0.4;
-  transform: rotate(7deg);
-}
-
-.hero-collage__photo {
-  position: absolute;
-  inset: 7% 0 7% 18%;
-  overflow: hidden;
-  border-radius: clamp(2rem, 4vw, 3.5rem);
-  background:
-    linear-gradient(180deg, rgba(15, 11, 13, 0.1), rgba(15, 11, 13, 0.28)),
-    radial-gradient(circle at 72% 28%, rgba(255, 247, 240, 0.24), transparent 18%),
-    radial-gradient(circle at 28% 30%, rgba(181, 123, 134, 0.2), transparent 26%),
-    url("../assets/photos/00201b6f-7c7f-4bb0-bece-c66678f13054.jpg") center 34% / cover no-repeat,
-    linear-gradient(160deg, #2d2026 0%, #181315 46%, #100d0f 100%);
-  box-shadow: 0 34px 70px rgba(7, 5, 6, 0.34);
-  transform: rotate(5deg);
-}
-
-.hero-collage__photo::before {
-  content: "";
-  position: absolute;
-  inset: -12% 42% -18% -12%;
-  background:
-    linear-gradient(120deg, rgba(255, 247, 240, 0.1), rgba(255, 247, 240, 0) 58%),
-    linear-gradient(180deg, rgba(201, 151, 117, 0.18), rgba(181, 123, 134, 0.04));
-  transform: rotate(14deg);
-}
-
-.hero-collage__photo::after {
-  content: "";
-  position: absolute;
-  right: -12%;
-  bottom: 12%;
-  width: 62%;
-  height: 54%;
-  border-radius: 52% 48% 58% 42% / 44% 58% 42% 56%;
-  border: 1px solid rgba(255, 247, 240, 0.16);
-  opacity: 0.34;
-}
-
-.hero-collage__style {
-  position: absolute;
-  z-index: 2;
-  display: inline-flex;
-  align-items: center;
-  padding: 0.8rem 1rem;
-  border-radius: 999px;
-  box-shadow: 0 18px 34px rgba(7, 5, 6, 0.22);
-  font-size: 0.92rem;
-  font-weight: 800;
-  line-height: 1;
-  letter-spacing: 0.01em;
-  backdrop-filter: blur(10px);
-  transition: transform var(--transition), box-shadow var(--transition);
-}
-
-.hero-collage__style:hover,
-.hero-collage__style:focus-visible {
-  box-shadow: 0 24px 42px rgba(7, 5, 6, 0.28);
-}
-
-.hero-collage__style--wcs {
-  top: 5%;
-  left: 0;
-  color: #21171c;
-  background: linear-gradient(135deg, rgba(255, 247, 240, 0.98), rgba(226, 197, 177, 0.94) 42%, rgba(201, 151, 117, 0.9) 100%);
-  transform: rotate(-8deg);
-}
-
-.hero-collage__style--wcs:hover,
-.hero-collage__style--wcs:focus-visible {
-  transform: rotate(-8deg) translateY(-2px);
-}
-
-.hero-collage__style--zouk {
-  top: 34%;
-  left: 0.4rem;
-  color: var(--text-light);
-  background: linear-gradient(135deg, rgba(181, 123, 134, 0.94), rgba(128, 80, 93, 0.94) 58%, rgba(76, 38, 52, 0.96) 100%);
-  transform: rotate(-2deg);
-}
-
-.hero-collage__style--zouk:hover,
-.hero-collage__style--zouk:focus-visible {
-  transform: rotate(-2deg) translateY(-2px);
-}
-
-.hero-collage__style--blues {
-  left: 1.15rem;
-  bottom: 5%;
-  color: var(--text-light);
-  background: linear-gradient(135deg, rgba(104, 55, 70, 0.94), rgba(92, 39, 56, 0.96) 52%, rgba(34, 25, 29, 0.98) 100%);
-  transform: rotate(5deg);
-}
-
-.hero-collage__style--blues:hover,
-.hero-collage__style--blues:focus-visible {
-  transform: rotate(5deg) translateY(-2px);
-}
-
-.hero-collage__badge {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  z-index: 2;
-  display: grid;
-  gap: 0.35rem;
-  max-width: 14rem;
-  padding: 1.05rem 1.15rem;
-  border-radius: 1.4rem;
-  background: linear-gradient(155deg, rgba(27, 20, 23, 0.94), rgba(47, 32, 40, 0.9));
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 22px 44px rgba(7, 5, 6, 0.24);
-}
-
-.hero-collage__badge p,
-.hero-collage__badge span {
-  margin: 0;
-}
-
-.hero-collage__badge p {
-  color: var(--accent-copper-light);
-  font-size: 1rem;
-  font-weight: 800;
-}
-
-.hero-collage__badge span {
-  color: var(--text-muted-light);
-  font-size: 0.88rem;
-  line-height: 1.55;
 }
 
 .hero-emblem {
@@ -1122,7 +938,7 @@ body.nav-open .menu-toggle span:nth-child(3) {
 .style-block__title {
   margin: 0;
   max-width: none;
-  font-size: clamp(3.6rem, 9vw, 6.8rem);
+  font-size: clamp(2.88rem, 7.2vw, 5.44rem);
   line-height: 0.86;
   letter-spacing: -0.04em;
   color: var(--text-dark);
@@ -1629,26 +1445,6 @@ select:focus-visible {
     padding-top: clamp(3.5rem, 7vw, 5rem);
   }
 
-  .hero__inner--home .hero__visual--home {
-    order: -1;
-    justify-content: center;
-  }
-
-  .hero__inner--home .hero__copy {
-    max-width: none;
-  }
-
-  .hero-collage {
-    width: min(100%, 34rem);
-    min-height: clamp(25rem, 70vw, 35rem);
-    margin: 0 auto;
-    padding-left: clamp(0.8rem, 3vw, 1.6rem);
-  }
-
-  .hero-collage__photo {
-    inset: 8% 0 8% 12%;
-  }
-
   .hero__note {
     margin-left: 0;
   }
@@ -1736,16 +1532,7 @@ select:focus-visible {
   }
 
   .hero h1 {
-    font-size: clamp(2.6rem, 13vw, 4.2rem);
-  }
-
-  .hero__brand-lockup {
-    gap: 0.65rem;
-    margin-bottom: 1rem;
-  }
-
-  .hero__mark {
-    width: 8.75rem;
+    font-size: clamp(2.34rem, 11.7vw, 3.78rem);
   }
 
   .brand__logo {
@@ -1754,64 +1541,6 @@ select:focus-visible {
 
   .brand--footer .brand__logo {
     height: 4.75rem;
-  }
-
-  .hero__inner--home .lead {
-    font-size: 1rem;
-  }
-
-  .hero-collage {
-    min-height: 21rem;
-    padding: 0.2rem 0 1.25rem 0.45rem;
-  }
-
-  .hero-collage::before {
-    inset: 12% 4% 10% 10%;
-  }
-
-  .hero-collage::after {
-    inset: 10% 2% 4% 20%;
-  }
-
-  .hero-collage__photo {
-    inset: 10% 0 13% 8%;
-    transform: rotate(3deg);
-    border-radius: 2rem;
-  }
-
-  .hero-collage__style {
-    padding: 0.68rem 0.85rem;
-    font-size: 0.82rem;
-  }
-
-  .hero-collage__style--wcs {
-    top: 3%;
-    left: 0;
-  }
-
-  .hero-collage__style--zouk {
-    top: 32%;
-    left: 0.1rem;
-  }
-
-  .hero-collage__style--blues {
-    left: 0.5rem;
-    bottom: 9%;
-  }
-
-  .hero-collage__badge {
-    right: 0;
-    bottom: 0;
-    max-width: 10.8rem;
-    padding: 0.9rem 1rem;
-  }
-
-  .hero-collage__badge p {
-    font-size: 0.95rem;
-  }
-
-  .hero-collage__badge span {
-    font-size: 0.8rem;
   }
 
   .hero-emblem__logo {
