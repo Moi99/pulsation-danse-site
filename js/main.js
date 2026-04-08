@@ -16,12 +16,6 @@ const videoStyleName = document.querySelector("[data-video-style-name]");
 const videoPlaceholderLabel = document.querySelector("[data-video-placeholder-label]");
 const videoModalTitle = document.querySelector("#video-modal-title");
 const videoModalCloseButton = document.querySelector(".video-modal__close");
-const scrollStageSections = Array.from(document.querySelectorAll("[data-scroll-stage]"))
-  .map((section) => ({
-    section,
-    content: section.querySelector("[data-scroll-stage-content]")
-  }))
-  .filter(({ content }) => content);
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
 const lerp = (start, end, amount) => start + (end - start) * amount;
@@ -127,6 +121,8 @@ if (videoModal && videoTriggers.length) {
 }
 
 const syncGlowParallax = () => {
+  glowFrame = 0;
+
   if (!glowSurfaces.length) {
     return;
   }
@@ -162,60 +158,26 @@ const syncGlowParallax = () => {
   });
 };
 
-const syncScrollStageMotion = () => {
-  if (!scrollStageSections.length) {
+let glowFrame = 0;
+
+const queueGlowParallax = () => {
+  if (!glowSurfaces.length || glowFrame) {
     return;
   }
 
-  if (prefersReducedMotion.matches) {
-    scrollStageSections.forEach(({ content }) => {
-      content.style.setProperty("--scroll-stage-shift", "0px");
-    });
-    return;
-  }
-
-  const viewportHeight = window.innerHeight || 1;
-
-  scrollStageSections.forEach(({ section, content }) => {
-    const rect = section.getBoundingClientRect();
-    const passage = viewportHeight + rect.height;
-    const progress = clamp((viewportHeight - rect.top) / passage, 0, 1);
-    const centered = progress * 2 - 1;
-    const speed = Number.parseFloat(section.dataset.scrollSpeed || "1.5");
-    const desiredTravel = (Math.max(speed, 1) - 1) * passage * 0.5;
-    const maxTravel = rect.height * 0.34 + viewportHeight * 0.08;
-    const travel = clamp(desiredTravel, 0, maxTravel);
-
-    content.style.setProperty("--scroll-stage-shift", `${(centered * travel).toFixed(2)}px`);
-  });
+  glowFrame = window.requestAnimationFrame(syncGlowParallax);
 };
 
-let scrollEffectsFrame = 0;
+if (glowSurfaces.length) {
+  queueGlowParallax();
 
-const syncScrollEffects = () => {
-  scrollEffectsFrame = 0;
-  syncGlowParallax();
-  syncScrollStageMotion();
-};
-
-const queueScrollEffects = () => {
-  if (scrollEffectsFrame) {
-    return;
-  }
-
-  scrollEffectsFrame = window.requestAnimationFrame(syncScrollEffects);
-};
-
-if (glowSurfaces.length || scrollStageSections.length) {
-  queueScrollEffects();
-
-  window.addEventListener("scroll", queueScrollEffects, { passive: true });
-  window.addEventListener("resize", queueScrollEffects);
+  window.addEventListener("scroll", queueGlowParallax, { passive: true });
+  window.addEventListener("resize", queueGlowParallax);
 
   if (typeof prefersReducedMotion.addEventListener === "function") {
-    prefersReducedMotion.addEventListener("change", queueScrollEffects);
+    prefersReducedMotion.addEventListener("change", queueGlowParallax);
   } else if (typeof prefersReducedMotion.addListener === "function") {
-    prefersReducedMotion.addListener(queueScrollEffects);
+    prefersReducedMotion.addListener(queueGlowParallax);
   }
 }
 
