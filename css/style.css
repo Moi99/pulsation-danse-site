@@ -2081,17 +2081,87 @@ select:focus-visible {
 
 @media (max-width: 720px) {
   body {
-    background: linear-gradient(180deg, #151113 0%, #1a1417 28%, #f7efe7 60%, #f7efe7 100%);
+    background:
+      radial-gradient(circle at top left, rgba(181, 123, 134, 0.12), transparent 26rem),
+      linear-gradient(180deg, #130f11 0%, #1a1417 24%, #f7efe7 58%, #f7efe7 100%);
   }
 
   :is(.section--dark, .site-footer, .hero) {
-    --glow-motion-scale: 0.45;
+    --glow-motion-scale: 0.55;
+    --glow-left-opacity: 0.92;
+    --glow-right-opacity: 0.72;
   }
 
   :is(.section--dark, .site-footer, .hero)::before,
   :is(.section--dark, .site-footer, .hero)::after {
     width: clamp(11rem, 42vw, 18rem);
     filter: blur(12px);
+  }
+
+  .section--light {
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.14)),
+      linear-gradient(180deg, #fbf6f1, #f5ebdf);
+  }
+
+  .section--dark {
+    background:
+      radial-gradient(circle at top right, rgba(201, 151, 117, 0.16), transparent 24rem),
+      radial-gradient(circle at top left, rgba(181, 123, 134, 0.14), transparent 20rem),
+      linear-gradient(180deg, #171114 0%, #1d151a 100%);
+  }
+
+  .section--light .stat-card,
+  .section--light .feature-card,
+  .section--light .style-preview,
+  .section--light .decision-card,
+  .section--light .contact-card,
+  .section--light .form-panel,
+  .section--light .cta-panel,
+  .section--light .info-band,
+  .section--light .venue-card {
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(248, 239, 231, 0.9));
+    border-color: rgba(92, 39, 56, 0.12);
+    box-shadow: 0 20px 42px rgba(18, 12, 15, 0.12);
+  }
+
+  .section--dark .feature-card--dark,
+  .section--dark .pricing-sheet,
+  .section--dark .promo-card,
+  .schedule-v2--dark .schedule-v2__day {
+    border-color: rgba(255, 255, 255, 0.14);
+    box-shadow: 0 24px 52px rgba(7, 5, 6, 0.3);
+  }
+
+  .section--dark .feature-card--dark {
+    background: linear-gradient(180deg, rgba(48, 33, 40, 0.98), rgba(30, 22, 27, 0.99));
+  }
+
+  .schedule-v2--dark .schedule-v2__day {
+    background:
+      radial-gradient(circle at top right, rgba(255, 247, 240, 0.12), transparent 34%),
+      linear-gradient(180deg, rgba(47, 33, 40, 0.98), rgba(28, 21, 25, 0.99));
+  }
+
+  .schedule-v2--dark .schedule-v2__slot {
+    background:
+      linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04)),
+      rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+
+  .section--dark .pricing-sheet {
+    background:
+      radial-gradient(circle at top right, rgba(255, 247, 240, 0.16), transparent 32%),
+      linear-gradient(180deg, rgba(46, 33, 39, 0.98), rgba(27, 20, 24, 0.99));
+  }
+
+  .section--dark .promo-card {
+    background:
+      radial-gradient(circle at top right, rgba(255, 255, 255, 0.14), transparent 30%),
+      radial-gradient(circle at bottom left, rgba(201, 151, 117, 0.24), transparent 36%),
+      linear-gradient(155deg, rgba(95, 47, 63, 0.97), rgba(33, 23, 28, 0.99));
   }
 
   .hero h1 {

@@ -1,0 +1,14 @@
+::ffff:127.0.0.1 - - [09/Apr/2026 15:56:48] "GET / HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [09/Apr/2026 15:56:48] "GET / HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [09/Apr/2026 15:56:48] "GET /cours.html HTTP/1.1" 200 -
+::ffff:192.168.18.12 - - [09/Apr/2026 15:57:14] "GET /index.html HTTP/1.1" 200 -
+::ffff:192.168.18.12 - - [09/Apr/2026 15:57:14] "GET /css/style.css HTTP/1.1" 200 -
+::ffff:192.168.18.12 - - [09/Apr/2026 15:57:14] "GET /assets/images/logo-pulsation.png HTTP/1.1" 200 -
+::ffff:192.168.18.12 - - [09/Apr/2026 15:57:14] "GET /js/main.js HTTP/1.1" 200 -
+::ffff:192.168.18.12 - - [09/Apr/2026 15:57:51] "GET /index.html HTTP/1.1" 304 -
+::ffff:192.168.18.12 - - [09/Apr/2026 15:57:51] "GET /index.html HTTP/1.1" 200 -
+::ffff:192.168.18.12 - - [09/Apr/2026 15:57:55] "GET /cours.html HTTP/1.1" 200 -
+::ffff:192.168.18.12 - - [09/Apr/2026 15:58:51] "GET /horaire-et-tarifs.html HTTP/1.1" 200 -
+::ffff:192.168.18.12 - - [09/Apr/2026 15:58:51] "GET /css/style.css HTTP/1.1" 304 -
+::ffff:192.168.18.12 - - [09/Apr/2026 15:59:48] "GET /horaire-et-tarifs.html HTTP/1.1" 304 -
+::ffff:192.168.18.12 - - [09/Apr/2026 15:59:48] "GET /js/main.js HTTP/1.1" 304 -
