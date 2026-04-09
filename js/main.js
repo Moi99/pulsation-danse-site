@@ -19,6 +19,19 @@ const videoModalCloseButton = document.querySelector(".video-modal__close");
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
 const lerp = (start, end, amount) => start + (end - start) * amount;
+const parseLocalDate = (value) => {
+  if (!value) {
+    return null;
+  }
+
+  const [year, month, day] = value.split("-").map(Number);
+
+  if (![year, month, day].every(Number.isFinite)) {
+    return null;
+  }
+
+  return new Date(year, month - 1, day, 12);
+};
 let lastVideoTrigger = null;
 
 const closeMenu = () => {
@@ -58,6 +71,50 @@ if (header) {
 
 yearTargets.forEach((target) => {
   target.textContent = new Date().getFullYear();
+});
+
+document.querySelectorAll("[data-session-calendar]").forEach((calendar) => {
+  const sessionCards = calendar.querySelectorAll("[data-session-start]");
+  const durationDays = Number.parseInt(calendar.dataset.sessionDurationDays || "49", 10);
+
+  if (!sessionCards.length || Number.isNaN(durationDays)) {
+    return;
+  }
+
+  const now = new Date();
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 12);
+
+  sessionCards.forEach((card) => {
+    const startDate = parseLocalDate(card.dataset.sessionStart);
+
+    if (!startDate || Number.isNaN(startDate.getTime())) {
+      return;
+    }
+
+    const endDate = new Date(startDate);
+    endDate.setDate(endDate.getDate() + durationDays);
+
+    let state = "upcoming";
+    let label = "\u00c0 venir";
+
+    if (today >= endDate) {
+      state = "complete";
+      label = "Termin\u00e9e";
+    } else if (today >= startDate) {
+      state = "current";
+      label = "En cours";
+    }
+
+    card.dataset.sessionState = state;
+    card.classList.remove("is-upcoming", "is-current", "is-complete");
+    card.classList.add(`is-${state}`);
+
+    const status = card.querySelector("[data-session-status]");
+
+    if (status) {
+      status.textContent = label;
+    }
+  });
 });
 
 if (form && formNote) {
