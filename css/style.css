@@ -34,12 +34,16 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  overscroll-behavior-x: none;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
-  overflow-x: clip;
+  overflow-x: hidden;
+  overscroll-behavior-x: none;
+  touch-action: pan-x pan-y pinch-zoom;
   font-family: "Manrope", sans-serif;
   color: var(--text-dark);
   background:
@@ -248,6 +252,7 @@ body.nav-open .menu-toggle span:nth-child(3) {
 .hero {
   position: relative;
   overflow: hidden;
+  contain: paint;
   color: var(--text-light);
   background:
     radial-gradient(circle at top right, rgba(201, 151, 117, 0.18), transparent 28rem),
@@ -461,11 +466,44 @@ body.nav-open .menu-toggle span:nth-child(3) {
 .section {
   position: relative;
   padding: var(--section-space) 0;
+  overflow: hidden;
+  contain: paint;
 }
 
 .section__inner {
   width: min(calc(100% - 2 * var(--gutter)), var(--content-max));
   margin: 0 auto;
+}
+
+main,
+.section,
+.section__inner,
+.hero,
+.hero__inner,
+.site-header,
+.site-header__inner,
+.site-footer,
+.site-footer__inner {
+  max-width: 100%;
+}
+
+.hero__inner > *,
+.split-panel > *,
+.style-block > *,
+.contact-layout > *,
+.site-footer__inner > *,
+.stats-grid > *,
+.card-grid > *,
+.pricing-grid > *,
+.schedule-grid > *,
+.schedule-v2 > *,
+.pricing-showcase > *,
+.pricing-sheet__grid > *,
+.venue-grid > *,
+.annual-calendar > *,
+.info-band__grid > *,
+.section-heading--split > * {
+  min-width: 0;
 }
 
 .section--light {
@@ -1864,6 +1902,7 @@ body.nav-open .menu-toggle span:nth-child(3) {
 }
 
 .site-footer {
+  contain: paint;
   color: var(--text-light);
   background:
     radial-gradient(circle at top right, rgba(201, 151, 117, 0.14), transparent 26rem),
@@ -1940,6 +1979,15 @@ body.nav-open .menu-toggle span:nth-child(3) {
   color: var(--text-muted-light);
 }
 
+.contact-card h2,
+.contact-card h2 a,
+.footer-links li,
+.footer-links a,
+.site-footer__lead {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
 .site-footer__meta {
   width: min(calc(100% - 2 * var(--gutter)), var(--content-max));
   margin: 0 auto;
@@ -1982,6 +2030,11 @@ select:focus-visible {
     align-items: start;
   }
 
+  .hero__visual,
+  .hero-emblem {
+    overflow: hidden;
+  }
+
   :is(.section--dark, .site-footer, .hero) {
     --glow-motion-scale: 0.72;
   }
@@ -1991,6 +2044,16 @@ select:focus-visible {
     padding-top: clamp(3.5rem, 7vw, 5rem);
   }
 
+  .hero-emblem__logo {
+    width: min(114%, 32rem);
+    max-width: 100%;
+  }
+
+  .hero-home-title__line--nowrap,
+  .style-block__title {
+    white-space: normal;
+  }
+
   .hero__note {
     margin-left: 0;
   }
@@ -1998,6 +2061,11 @@ select:focus-visible {
   .site-footer__inner > :nth-child(2),
   .site-footer__inner > :nth-child(3) {
     padding: 1rem 1.05rem;
+  }
+
+  .style-video-trigger {
+    min-width: 0;
+    width: 100%;
   }
 
   .info-band__grid,
@@ -2080,16 +2148,17 @@ select:focus-visible {
 }
 
 @media (max-width: 720px) {
-  body {
-    background:
-      radial-gradient(circle at top left, rgba(181, 123, 134, 0.12), transparent 26rem),
-      linear-gradient(180deg, #130f11 0%, #1a1417 24%, #f7efe7 58%, #f7efe7 100%);
+  main,
+  .section,
+  .section__inner,
+  .hero,
+  .hero__inner {
+    overflow-x: hidden;
   }
 
-  :is(.section--dark, .site-footer, .hero) {
-    --glow-motion-scale: 0.55;
-    --glow-left-opacity: 0.92;
-    --glow-right-opacity: 0.72;
+  .hero__visual,
+  .hero-emblem {
+    overflow: hidden;
   }
 
   :is(.section--dark, .site-footer, .hero)::before,
@@ -2098,74 +2167,12 @@ select:focus-visible {
     filter: blur(12px);
   }
 
-  .section--light {
-    background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.14)),
-      linear-gradient(180deg, #fbf6f1, #f5ebdf);
-  }
-
-  .section--dark {
-    background:
-      radial-gradient(circle at top right, rgba(201, 151, 117, 0.16), transparent 24rem),
-      radial-gradient(circle at top left, rgba(181, 123, 134, 0.14), transparent 20rem),
-      linear-gradient(180deg, #171114 0%, #1d151a 100%);
-  }
-
-  .section--light .stat-card,
-  .section--light .feature-card,
-  .section--light .style-preview,
-  .section--light .decision-card,
-  .section--light .contact-card,
-  .section--light .form-panel,
-  .section--light .cta-panel,
-  .section--light .info-band,
-  .section--light .venue-card {
-    background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(248, 239, 231, 0.9));
-    border-color: rgba(92, 39, 56, 0.12);
-    box-shadow: 0 20px 42px rgba(18, 12, 15, 0.12);
-  }
-
-  .section--dark .feature-card--dark,
-  .section--dark .pricing-sheet,
-  .section--dark .promo-card,
-  .schedule-v2--dark .schedule-v2__day {
-    border-color: rgba(255, 255, 255, 0.14);
-    box-shadow: 0 24px 52px rgba(7, 5, 6, 0.3);
-  }
-
-  .section--dark .feature-card--dark {
-    background: linear-gradient(180deg, rgba(48, 33, 40, 0.98), rgba(30, 22, 27, 0.99));
-  }
-
-  .schedule-v2--dark .schedule-v2__day {
-    background:
-      radial-gradient(circle at top right, rgba(255, 247, 240, 0.12), transparent 34%),
-      linear-gradient(180deg, rgba(47, 33, 40, 0.98), rgba(28, 21, 25, 0.99));
-  }
-
-  .schedule-v2--dark .schedule-v2__slot {
-    background:
-      linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04)),
-      rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.12);
-  }
-
-  .section--dark .pricing-sheet {
-    background:
-      radial-gradient(circle at top right, rgba(255, 247, 240, 0.16), transparent 32%),
-      linear-gradient(180deg, rgba(46, 33, 39, 0.98), rgba(27, 20, 24, 0.99));
-  }
-
-  .section--dark .promo-card {
-    background:
-      radial-gradient(circle at top right, rgba(255, 255, 255, 0.14), transparent 30%),
-      radial-gradient(circle at bottom left, rgba(201, 151, 117, 0.24), transparent 36%),
-      linear-gradient(155deg, rgba(95, 47, 63, 0.97), rgba(33, 23, 28, 0.99));
-  }
-
   .hero h1 {
     font-size: clamp(2.34rem, 11.7vw, 3.78rem);
+  }
+
+  .style-block__title {
+    white-space: normal;
   }
 
   .schedule-v2__day {
@@ -2208,7 +2215,7 @@ select:focus-visible {
   }
 
   .hero-emblem__logo {
-    width: min(135%, 30rem);
+    width: min(118%, 30rem);
   }
 
   .stats-grid,
