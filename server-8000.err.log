@@ -662,3 +662,11 @@ ConnectionAbortedError: [WinError 10053] Une connexion établie a été abandonnée 
 ::ffff:192.168.18.12 - - [10/Apr/2026 14:20:23] "GET /horaire-et-tarifs.html HTTP/1.1" 200 -
 ::ffff:192.168.18.12 - - [10/Apr/2026 14:30:11] "GET /horaire-et-tarifs.html HTTP/1.1" 200 -
 ::ffff:192.168.18.12 - - [10/Apr/2026 14:30:11] "GET /css/style.css?v=20260410-4 HTTP/1.1" 200 -
+::ffff:192.168.18.12 - - [10/Apr/2026 14:30:26] "GET /index.html HTTP/1.1" 200 -
+::ffff:192.168.18.12 - - [10/Apr/2026 14:30:26] "GET /css/style.css?v=20260410-4 HTTP/1.1" 304 -
+::ffff:192.168.18.12 - - [10/Apr/2026 14:30:43] "GET /cours.html HTTP/1.1" 200 -
+::ffff:192.168.18.12 - - [10/Apr/2026 14:30:43] "GET /css/style.css?v=20260410-4 HTTP/1.1" 304 -
+::ffff:192.168.18.12 - - [10/Apr/2026 14:31:47] "GET /contact.html HTTP/1.1" 200 -
+::ffff:192.168.18.12 - - [10/Apr/2026 14:31:47] "GET /css/style.css?v=20260410-4 HTTP/1.1" 304 -
+::ffff:192.168.18.12 - - [10/Apr/2026 14:32:01] "GET /contact.html HTTP/1.1" 304 -
+::ffff:192.168.18.12 - - [10/Apr/2026 14:32:01] "GET /css/style.css?v=20260410-4 HTTP/1.1" 304 -
