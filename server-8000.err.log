@@ -670,3 +670,118 @@ ConnectionAbortedError: [WinError 10053] Une connexion établie a été abandonnée 
 ::ffff:192.168.18.12 - - [10/Apr/2026 14:31:47] "GET /css/style.css?v=20260410-4 HTTP/1.1" 304 -
 ::ffff:192.168.18.12 - - [10/Apr/2026 14:32:01] "GET /contact.html HTTP/1.1" 304 -
 ::ffff:192.168.18.12 - - [10/Apr/2026 14:32:01] "GET /css/style.css?v=20260410-4 HTTP/1.1" 304 -
+::ffff:192.168.18.12 - - [10/Apr/2026 14:38:08] "GET /contact.html HTTP/1.1" 200 -
+::ffff:192.168.18.12 - - [10/Apr/2026 14:38:08] "GET /css/style.css?v=20260410-5 HTTP/1.1" 200 -
+::ffff:192.168.18.12 - - [10/Apr/2026 14:38:10] "GET /horaire-et-tarifs.html HTTP/1.1" 200 -
+::ffff:192.168.18.12 - - [10/Apr/2026 14:38:10] "GET /css/style.css?v=20260410-5 HTTP/1.1" 304 -
+::ffff:192.168.18.12 - - [10/Apr/2026 14:41:38] "GET /horaire-et-tarifs.html HTTP/1.1" 200 -
+::ffff:192.168.18.12 - - [10/Apr/2026 14:41:38] "GET /css/style.css?v=20260410-6 HTTP/1.1" 200 -
+::ffff:192.168.18.12 - - [10/Apr/2026 14:43:01] "GET /horaire-et-tarifs.html HTTP/1.1" 200 -
+::ffff:192.168.18.12 - - [10/Apr/2026 14:43:01] "GET /css/style.css?v=20260410-7 HTTP/1.1" 200 -
+::ffff:192.168.18.12 - - [10/Apr/2026 14:45:22] "GET /horaire-et-tarifs.html HTTP/1.1" 200 -
+::ffff:192.168.18.12 - - [10/Apr/2026 14:45:22] "GET /css/style.css?v=20260410-8 HTTP/1.1" 200 -
+::ffff:192.168.18.12 - - [10/Apr/2026 14:46:00] "GET /horaire-et-tarifs.html HTTP/1.1" 304 -
+::ffff:192.168.18.12 - - [10/Apr/2026 14:46:00] "GET /css/style.css?v=20260410-8 HTTP/1.1" 304 -
+::ffff:192.168.18.12 - - [10/Apr/2026 14:46:33] "GET /horaire-et-tarifs.html HTTP/1.1" 304 -
+::ffff:192.168.18.12 - - [10/Apr/2026 14:46:33] "GET /css/style.css?v=20260410-8 HTTP/1.1" 304 -
+::ffff:192.168.18.12 - - [10/Apr/2026 14:47:46] "GET /index.html HTTP/1.1" 200 -
+::ffff:192.168.18.12 - - [10/Apr/2026 14:47:46] "GET /css/style.css?v=20260410-8 HTTP/1.1" 304 -
+::ffff:192.168.18.12 - - [10/Apr/2026 14:48:24] "GET /cours.html HTTP/1.1" 200 -
+::ffff:192.168.18.12 - - [10/Apr/2026 14:48:24] "GET /css/style.css?v=20260410-8 HTTP/1.1" 304 -
+::ffff:127.0.0.1 - - [10/Apr/2026 14:54:32] "GET /horaire-et-tarifs.html HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [10/Apr/2026 14:54:32] "GET /index.html HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [10/Apr/2026 14:54:32] "GET /css/style.css?v=20260410-8 HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [10/Apr/2026 14:54:32] "GET /css/style.css?v=20260410-8 HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [10/Apr/2026 14:54:32] "GET /assets/images/logo-pulsation.png HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [10/Apr/2026 14:54:32] "GET /assets/images/logo-pulsation.png HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [10/Apr/2026 14:54:32] "GET /js/main.js?v=20260409-1 HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [10/Apr/2026 14:54:32] "GET /js/main.js?v=20260409-1 HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [10/Apr/2026 14:55:04] "GET /horaire-et-tarifs.html HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [10/Apr/2026 14:55:04] "GET /a-propos.html HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [10/Apr/2026 14:55:04] "GET /css/style.css?v=20260410-8 HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [10/Apr/2026 14:55:04] "GET /js/main.js?v=20260409-1 HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [10/Apr/2026 14:55:04] "GET /assets/images/logo-pulsation.png HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [10/Apr/2026 14:55:04] "GET /css/style.css?v=20260410-8 HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [10/Apr/2026 14:55:04] "GET /assets/images/logo-pulsation.png HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [10/Apr/2026 14:55:04] "GET /js/main.js?v=20260409-1 HTTP/1.1" 200 -
+::ffff:192.168.18.12 - - [10/Apr/2026 14:56:09] "GET /cours.html HTTP/1.1" 200 -
+::ffff:192.168.18.12 - - [10/Apr/2026 14:56:09] "GET /css/style.css?v=20260410-9 HTTP/1.1" 200 -
+::ffff:192.168.18.12 - - [10/Apr/2026 14:56:28] "GET /horaire-et-tarifs.html HTTP/1.1" 200 -
+::ffff:192.168.18.12 - - [10/Apr/2026 14:56:28] "GET /css/style.css?v=20260410-9 HTTP/1.1" 304 -
+::ffff:192.168.18.12 - - [10/Apr/2026 15:02:15] "GET /horaire-et-tarifs.html HTTP/1.1" 200 -
+::ffff:192.168.18.12 - - [10/Apr/2026 15:02:15] "GET /css/style.css?v=20260410-10 HTTP/1.1" 200 -
+::ffff:192.168.18.12 - - [10/Apr/2026 15:10:40] "GET /horaire-et-tarifs.html HTTP/1.1" 200 -
+::ffff:192.168.18.12 - - [10/Apr/2026 15:10:40] "GET /css/style.css?v=20260410-11 HTTP/1.1" 200 -
+::ffff:192.168.18.12 - - [10/Apr/2026 15:18:44] "GET /horaire-et-tarifs.html HTTP/1.1" 200 -
+::ffff:192.168.18.12 - - [10/Apr/2026 15:18:44] "GET /css/style.css?v=20260410-12 HTTP/1.1" 200 -
+::ffff:192.168.18.12 - - [10/Apr/2026 15:20:57] "GET /horaire-et-tarifs.html HTTP/1.1" 200 -
+::ffff:192.168.18.12 - - [10/Apr/2026 15:20:57] "GET /css/style.css?v=20260410-13 HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [10/Apr/2026 15:29:59] "GET /scroll-debug.html?target=horaire-et-tarifs.html&width=430&height=932 HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [10/Apr/2026 15:29:59] "GET /horaire-et-tarifs.html HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [10/Apr/2026 15:29:59] "GET /horaire-et-tarifs.html HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [10/Apr/2026 15:29:59] "GET /css/style.css?v=20260410-13 HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [10/Apr/2026 15:29:59] "GET /assets/images/logo-pulsation.png HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [10/Apr/2026 15:29:59] "GET /js/main.js?v=20260409-1 HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [10/Apr/2026 15:31:23] "GET /scroll-debug.html?target=horaire-et-tarifs.html&width=430&height=932 HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [10/Apr/2026 15:31:23] "GET /horaire-et-tarifs.html HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [10/Apr/2026 15:31:23] "GET /horaire-et-tarifs.html HTTP/1.1" 200 -
+----------------------------------------
+Exception occurred during processing of request from ('::ffff:127.0.0.1', 59641, 0, 0)
+Traceback (most recent call last):
+  File "C:\Users\grond\AppData\Local\Programs\Python\Python312\Lib\socketserver.py", line 697, in process_request_thread
+    self.finish_request(request, client_address)
+  File "C:\Users\grond\AppData\Local\Programs\Python\Python312\Lib\http\server.py", line 1311, in finish_request
+    self.RequestHandlerClass(request, client_address, self,
+  File "C:\Users\grond\AppData\Local\Programs\Python\Python312\Lib\http\server.py", line 672, in __init__
+    super().__init__(*args, **kwargs)
+  File "C:\Users\grond\AppData\Local\Programs\Python\Python312\Lib\socketserver.py", line 766, in __init__
+    self.handle()
+  File "C:\Users\grond\AppData\Local\Programs\Python\Python312\Lib\http\server.py", line 436, in handle
+    self.handle_one_request()
+  File "C:\Users\grond\AppData\Local\Programs\Python\Python312\Lib\http\server.py", line 424, in handle_one_request
+    method()
+  File "C:\Users\grond\AppData\Local\Programs\Python\Python312\Lib\http\server.py", line 679, in do_GET
+    self.copyfile(f, self.wfile)
+  File "C:\Users\grond\AppData\Local\Programs\Python\Python312\Lib\http\server.py", line 878, in copyfile
+    shutil.copyfileobj(source, outputfile)
+  File "C:\Users\grond\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 204, in copyfileobj
+    fdst_write(buf)
+  File "C:\Users\grond\AppData\Local\Programs\Python\Python312\Lib\socketserver.py", line 845, in write
+    self._sock.sendall(b)
+::ffff:127.0.0.1 - - [10/Apr/2026 15:31:23] "GET /assets/images/logo-pulsation.png HTTP/1.1" 200 -
+ConnectionAbortedError: [WinError 10053] Une connexion établie a été abandonnée par un logiciel de votre ordinateur hôte
+::ffff:127.0.0.1 - - [10/Apr/2026 15:31:23] "GET /js/main.js?v=20260409-1 HTTP/1.1" 200 -
+----------------------------------------
+::ffff:127.0.0.1 - - [10/Apr/2026 15:31:23] "GET /css/style.css?v=20260410-13 HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [10/Apr/2026 15:31:50] "GET /scroll-debug.html?target=horaire-et-tarifs.html&width=430&height=932 HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [10/Apr/2026 15:31:50] "GET /horaire-et-tarifs.html HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [10/Apr/2026 15:31:50] "GET /horaire-et-tarifs.html HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [10/Apr/2026 15:31:50] "GET /css/style.css?v=20260410-13 HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [10/Apr/2026 15:31:50] "GET /assets/images/logo-pulsation.png HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [10/Apr/2026 15:31:50] "GET /js/main.js?v=20260409-1 HTTP/1.1" 200 -
+::ffff:192.168.18.12 - - [10/Apr/2026 15:33:05] "GET /horaire-et-tarifs.html HTTP/1.1" 200 -
+::ffff:192.168.18.12 - - [10/Apr/2026 15:33:05] "GET /css/style.css?v=20260410-14 HTTP/1.1" 200 -
+::ffff:192.168.18.12 - - [10/Apr/2026 15:33:56] "GET /index.html HTTP/1.1" 200 -
+::ffff:192.168.18.12 - - [10/Apr/2026 15:33:56] "GET /css/style.css?v=20260410-14 HTTP/1.1" 304 -
+::ffff:192.168.18.12 - - [10/Apr/2026 15:37:29] "GET /horaire-et-tarifs.html HTTP/1.1" 304 -
+::ffff:192.168.18.12 - - [10/Apr/2026 15:37:29] "GET /css/style.css?v=20260410-14 HTTP/1.1" 304 -
+::ffff:192.168.18.12 - - [10/Apr/2026 15:38:51] "GET /horaire-et-tarifs.html HTTP/1.1" 200 -
+::ffff:192.168.18.12 - - [10/Apr/2026 15:38:51] "GET /css/style.css?v=20260410-15 HTTP/1.1" 200 -
+::ffff:192.168.18.12 - - [10/Apr/2026 15:38:55] "GET /horaire-et-tarifs.html HTTP/1.1" 304 -
+::ffff:192.168.18.12 - - [10/Apr/2026 15:38:55] "GET /css/style.css?v=20260410-15 HTTP/1.1" 304 -
+::ffff:127.0.0.1 - - [10/Apr/2026 15:42:15] "GET /sticky-debug.html?target=horaire-et-tarifs.html&width=430&height=932&scroll=1200 HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [10/Apr/2026 15:42:15] "GET /horaire-et-tarifs.html HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [10/Apr/2026 15:42:15] "GET /horaire-et-tarifs.html HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [10/Apr/2026 15:42:15] "GET /css/style.css?v=20260410-15 HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [10/Apr/2026 15:42:15] "GET /js/main.js?v=20260409-1 HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [10/Apr/2026 15:42:15] "GET /assets/images/logo-pulsation.png HTTP/1.1" 200 -
+::ffff:192.168.18.12 - - [10/Apr/2026 15:43:22] "GET /horaire-et-tarifs.html HTTP/1.1" 200 -
+::ffff:192.168.18.12 - - [10/Apr/2026 15:43:22] "GET /css/style.css?v=20260410-16 HTTP/1.1" 200 -
+::ffff:192.168.18.7 - - [10/Apr/2026 19:06:58] "GET /index.html HTTP/1.1" 200 -
+::ffff:192.168.18.7 - - [10/Apr/2026 19:06:58] "GET /css/style.css?v=20260410-16 HTTP/1.1" 200 -
+::ffff:192.168.18.7 - - [10/Apr/2026 19:06:58] "GET /assets/images/logo-pulsation.png HTTP/1.1" 200 -
+::ffff:192.168.18.7 - - [10/Apr/2026 19:06:58] "GET /js/main.js?v=20260409-1 HTTP/1.1" 200 -
+::ffff:192.168.18.7 - - [10/Apr/2026 19:07:01] "GET /assets/images/favicon.png?v=20260410-5 HTTP/1.1" 200 -
+::ffff:192.168.18.7 - - [10/Apr/2026 19:07:35] "GET /cours.html HTTP/1.1" 200 -
+::ffff:192.168.18.7 - - [10/Apr/2026 19:08:44] "GET /horaire-et-tarifs.html HTTP/1.1" 200 -
+::ffff:192.168.18.7 - - [10/Apr/2026 19:12:56] "GET /horaire-et-tarifs.html HTTP/1.1" 304 -

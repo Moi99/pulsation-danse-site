@@ -15,7 +15,7 @@
   --accent-rose: #b57b86;
   --accent-plum: #5c2738;
   --shadow-soft: 0 18px 40px rgba(18, 12, 15, 0.14);
-  --shadow-soft-mobile-light: 0 0 24px -11px rgba(18, 12, 15, 0.16), 0 12px 24px -16px rgba(18, 12, 15, 0.18);
+  --shadow-soft-mobile-light: 0 0 28px -10px rgba(18, 12, 15, 0.18), 0 14px 28px -16px rgba(18, 12, 15, 0.2);
   --shadow-deep: 0 28px 70px rgba(8, 6, 8, 0.35);
   --radius-s: 18px;
   --radius-m: 28px;
@@ -35,14 +35,14 @@
 
 html {
   scroll-behavior: smooth;
-  overflow-x: hidden;
+  overflow-x: clip;
   overscroll-behavior-x: none;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
-  overflow-x: hidden;
+  overflow-x: clip;
   overscroll-behavior-x: none;
   touch-action: pan-x pan-y pinch-zoom;
   font-family: "Manrope", sans-serif;
@@ -2056,11 +2056,11 @@ select:focus-visible {
   }
 
   .annual-calendar__item.is-current {
-    box-shadow: 0 0 28px -10px rgba(118, 82, 57, 0.22), 0 14px 24px -16px rgba(118, 82, 57, 0.24);
+    box-shadow: 0 0 32px -9px rgba(118, 82, 57, 0.24), 0 16px 28px -16px rgba(118, 82, 57, 0.26);
   }
 
   .annual-calendar__item.is-complete {
-    box-shadow: 0 0 20px -12px rgba(19, 13, 15, 0.1), 0 10px 18px -16px rgba(19, 13, 15, 0.12);
+    box-shadow: 0 0 24px -11px rgba(19, 13, 15, 0.12), 0 12px 20px -16px rgba(19, 13, 15, 0.14);
   }
 
   .section-heading--split {
@@ -2080,6 +2080,10 @@ select:focus-visible {
   .hero__inner {
     min-height: auto;
     padding-top: clamp(3.5rem, 7vw, 5rem);
+  }
+
+  .page-home .hero--home .hero__visual {
+    order: -1;
   }
 
   .hero-emblem__logo {
