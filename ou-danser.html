@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=20260411-8">
+  <link rel="stylesheet" href="css/style.css?v=20260411-13">
 </head>
 <body>
   <a class="skip-link" href="#main-content">Aller au contenu</a>
@@ -39,14 +39,15 @@
     </div>
   </header>
 
-  <main id="main-content">
+  <main id="main-content" data-facebook-events data-events-source="data/evenements.json">
     <section class="hero hero--inner">
       <div class="hero__inner hero__inner--compact">
         <div class="hero__copy" data-reveal>
           <p class="eyebrow">Ou danser à Québec ?</p>
           <h1>Envie d'apprendre ou de pratiquer un peu ?</h1>
           <p class="lead">
-            Voici la liste des soirées régulières et des évènements spéciaux en liens avec le WCS, le Zouk et le Blues à Québec.
+            Voici la liste des sessions, des soirées régulières et des évènements spéciaux en liens avec
+            le West Coast Swing, le Zouk et le Blues à Québec.
           </p>
           <div class="button-row">
             <a class="btn btn--primary" href="#soirees-fixes">Soirées régulières</a>
@@ -101,47 +102,172 @@
     </section>
 
     <section class="section section--dark" id="evenements-facebook">
-      <div class="section__inner" data-facebook-events data-events-source="data/evenements.json">
+      <div class="section__inner">
         <div class="section-heading" data-reveal>
           <p class="eyebrow">Événements Facebook</p>
-          <h2>Les événements à suivre, classés pour aller droit au but.</h2>
-          <p>Les cartes seront alimentées par le fichier d'événements, puis les événements terminés passeront automatiquement dans les archives.</p>
+          <h2>Pour ne rien manquer à québec.</h2>
         </div>
 
-        <div class="event-board">
-          <section class="event-column event-column--session" data-reveal>
-            <div class="event-column__head">
-              <p class="card-tag">Session</p>
+        <div class="event-category-board">
+          <article class="event-category-card event-category-card--wcs" data-reveal>
+            <h3 class="event-category-card__title">WCS</h3>
+            <div class="event-category-card__links">
+              <a href="#events-wcs-session" data-event-category-link="wcs:session">
+                <span>Session</span>
+                <span data-event-count="wcs:session">0</span>
+              </a>
+              <a href="#events-wcs-soiree-locale" data-event-category-link="wcs:soiree-locale">
+                <span>Soirées locales</span>
+                <span data-event-count="wcs:soiree-locale">0</span>
+              </a>
+              <a href="#events-wcs-weekender" data-event-category-link="wcs:weekender">
+                <span>Weekender</span>
+                <span data-event-count="wcs:weekender">0</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="event-category-card event-category-card--zouk" data-reveal>
+            <h3 class="event-category-card__title">Zouk</h3>
+            <div class="event-category-card__links">
+              <a href="#events-zouk-session" data-event-category-link="zouk:session">
+                <span>Session</span>
+                <span data-event-count="zouk:session">0</span>
+              </a>
+              <a href="#events-zouk-soiree-locale" data-event-category-link="zouk:soiree-locale">
+                <span>Soirées locales</span>
+                <span data-event-count="zouk:soiree-locale">0</span>
+              </a>
+              <a href="#events-zouk-weekender" data-event-category-link="zouk:weekender">
+                <span>Weekender</span>
+                <span data-event-count="zouk:weekender">0</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="event-category-card event-category-card--blues" data-reveal>
+            <h3 class="event-category-card__title">Blues</h3>
+            <div class="event-category-card__links">
+              <a href="#events-blues-session" data-event-category-link="blues:session">
+                <span>Session</span>
+                <span data-event-count="blues:session">0</span>
+              </a>
+              <a href="#events-blues-soiree-locale" data-event-category-link="blues:soiree-locale">
+                <span>Soirées locales</span>
+                <span data-event-count="blues:soiree-locale">0</span>
+              </a>
+              <a href="#events-blues-weekender" data-event-category-link="blues:weekender">
+                <span>Weekender</span>
+                <span data-event-count="blues:weekender">0</span>
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--light" id="liste-evenements">
+      <div class="section__inner">
+        <div class="section-heading" data-reveal>
+          <p class="eyebrow eyebrow--dark">Liste des événements</p>
+          <h2>Les événements actifs, classés par danse.</h2>
+          <p>Les cartes ouvrent l'événement Facebook officiel dans un nouvel onglet.</p>
+        </div>
+
+        <div class="event-directory">
+          <section class="event-group event-group--wcs" id="events-wcs-session" data-reveal>
+            <div class="event-group__head">
+              <p class="card-tag">WCS</p>
               <h3>Sessions</h3>
             </div>
-            <div class="event-list" data-event-list="session"></div>
-            <p class="event-empty" data-event-empty="session">Aucune session Facebook à afficher pour le moment.</p>
+            <div class="event-list" data-event-list="wcs:session"></div>
+            <p class="event-empty" data-event-empty="wcs:session">Aucune session WCS à afficher pour le moment.</p>
           </section>
 
-          <section class="event-column event-column--local" data-reveal>
-            <div class="event-column__head">
-              <p class="card-tag">Soirée locale</p>
+          <section class="event-group event-group--wcs" id="events-wcs-soiree-locale" data-reveal>
+            <div class="event-group__head">
+              <p class="card-tag">WCS</p>
               <h3>Soirées locales</h3>
             </div>
-            <div class="event-list" data-event-list="soiree-locale"></div>
-            <p class="event-empty" data-event-empty="soiree-locale">Aucune soirée locale à afficher pour le moment.</p>
+            <div class="event-list" data-event-list="wcs:soiree-locale"></div>
+            <p class="event-empty" data-event-empty="wcs:soiree-locale">Aucune soirée locale WCS à afficher pour le moment.</p>
           </section>
 
-          <section class="event-column event-column--weekender" data-reveal>
-            <div class="event-column__head">
-              <p class="card-tag">Weekender</p>
+          <section class="event-group event-group--wcs" id="events-wcs-weekender" data-reveal>
+            <div class="event-group__head">
+              <p class="card-tag">WCS</p>
               <h3>Weekenders</h3>
             </div>
-            <div class="event-list" data-event-list="weekender"></div>
-            <p class="event-empty" data-event-empty="weekender">Aucun weekender à afficher pour le moment.</p>
+            <div class="event-list" data-event-list="wcs:weekender"></div>
+            <p class="event-empty" data-event-empty="wcs:weekender">Aucun weekender WCS à afficher pour le moment.</p>
+          </section>
+
+          <section class="event-group event-group--zouk" id="events-zouk-session" data-reveal>
+            <div class="event-group__head">
+              <p class="card-tag">Zouk</p>
+              <h3>Sessions</h3>
+            </div>
+            <div class="event-list" data-event-list="zouk:session"></div>
+            <p class="event-empty" data-event-empty="zouk:session">Aucune session Zouk à afficher pour le moment.</p>
+          </section>
+
+          <section class="event-group event-group--zouk" id="events-zouk-soiree-locale" data-reveal>
+            <div class="event-group__head">
+              <p class="card-tag">Zouk</p>
+              <h3>Soirées locales</h3>
+            </div>
+            <div class="event-list" data-event-list="zouk:soiree-locale"></div>
+            <p class="event-empty" data-event-empty="zouk:soiree-locale">Aucune soirée locale Zouk à afficher pour le moment.</p>
+          </section>
+
+          <section class="event-group event-group--zouk" id="events-zouk-weekender" data-reveal>
+            <div class="event-group__head">
+              <p class="card-tag">Zouk</p>
+              <h3>Weekenders</h3>
+            </div>
+            <div class="event-list" data-event-list="zouk:weekender"></div>
+            <p class="event-empty" data-event-empty="zouk:weekender">Aucun weekender Zouk à afficher pour le moment.</p>
+          </section>
+
+          <section class="event-group event-group--blues" id="events-blues-session" data-reveal>
+            <div class="event-group__head">
+              <p class="card-tag">Blues</p>
+              <h3>Sessions</h3>
+            </div>
+            <div class="event-list" data-event-list="blues:session"></div>
+            <p class="event-empty" data-event-empty="blues:session">Aucune session Blues à afficher pour le moment.</p>
+          </section>
+
+          <section class="event-group event-group--blues" id="events-blues-soiree-locale" data-reveal>
+            <div class="event-group__head">
+              <p class="card-tag">Blues</p>
+              <h3>Soirées locales</h3>
+            </div>
+            <div class="event-list" data-event-list="blues:soiree-locale"></div>
+            <p class="event-empty" data-event-empty="blues:soiree-locale">Aucune soirée locale Blues à afficher pour le moment.</p>
+          </section>
+
+          <section class="event-group event-group--blues" id="events-blues-weekender" data-reveal>
+            <div class="event-group__head">
+              <p class="card-tag">Blues</p>
+              <h3>Weekenders</h3>
+            </div>
+            <div class="event-list" data-event-list="blues:weekender"></div>
+            <p class="event-empty" data-event-empty="blues:weekender">Aucun weekender Blues à afficher pour le moment.</p>
           </section>
         </div>
 
-        <div class="event-archive" data-event-archive hidden>
+        <p class="event-directory__empty" data-event-directory-empty hidden>Aucun événement actif à afficher pour le moment.</p>
+
+        <div class="event-archive-cta" data-event-archive-cta hidden>
+          <a class="btn btn--dark" href="#archives-evenements" data-event-archive-link>Voir les archives</a>
+        </div>
+
+        <div class="event-archive" id="archives-evenements" data-event-archive hidden>
           <div class="event-archive__head">
-            <p class="eyebrow">Archives</p>
+            <p class="eyebrow eyebrow--dark">Archives</p>
             <h3>Événements passés</h3>
-            <p>Cette section se mettra à jour automatiquement quand la date de fin d'un événement sera dépassée.</p>
+            <p>Cette section se met à jour automatiquement quand la date de fin d'un événement est dépassée.</p>
           </div>
           <div class="event-archive__grid" data-event-archive-list></div>
         </div>
@@ -184,6 +310,6 @@
     <p class="site-footer__meta">© <span data-year></span> Pulsation Danse.</p>
   </footer>
 
-  <script src="js/main.js?v=20260411-2"></script>
+  <script src="js/main.js?v=20260411-7"></script>
 </body>
 </html>

@@ -41,6 +41,7 @@ const closeMenu = () => {
     return;
   }
 
+  document.documentElement.classList.remove("nav-open");
   body.classList.remove("nav-open");
   menuToggle.setAttribute("aria-expanded", "false");
 };
@@ -48,6 +49,7 @@ const closeMenu = () => {
 if (menuToggle && siteNav) {
   menuToggle.addEventListener("click", () => {
     const isOpen = body.classList.toggle("nav-open");
+    document.documentElement.classList.toggle("nav-open", isOpen);
     menuToggle.setAttribute("aria-expanded", String(isOpen));
   });
 
@@ -167,6 +169,12 @@ document.querySelectorAll("[data-session-calendar]").forEach((calendar) => {
 });
 
 if (facebookEventBoards.length) {
+  const eventTypes = ["session", "soiree-locale", "weekender"];
+  const eventDanceGroups = [
+    { slug: "wcs", aliases: ["wcs", "west-coast-swing"] },
+    { slug: "zouk", aliases: ["zouk", "zouk-bresilien"] },
+    { slug: "blues", aliases: ["blues"] }
+  ];
   const eventDateFormatter = new Intl.DateTimeFormat("fr-CA", {
     day: "numeric",
     month: "long",
@@ -203,6 +211,33 @@ if (facebookEventBoards.length) {
     }
 
     return [];
+  };
+
+  const getEventType = (event) => {
+    const type = slugify(event.type || "soiree-locale");
+
+    if (type === "soiree" || type === "soiree-locale" || type === "local") {
+      return "soiree-locale";
+    }
+
+    if (type === "session") {
+      return "session";
+    }
+
+    if (type === "weekend" || type === "weekender") {
+      return "weekender";
+    }
+
+    return eventTypes.includes(type) ? type : "soiree-locale";
+  };
+
+  const getEventDanceSlug = (event) => {
+    const dances = getEventDances(event).map(slugify);
+    const match = eventDanceGroups.find((group) =>
+      dances.some((dance) => dance === group.slug || group.aliases.includes(dance))
+    );
+
+    return match?.slug || "wcs";
   };
 
   const formatEventDateRange = (event) => {
@@ -312,12 +347,52 @@ if (facebookEventBoards.length) {
     );
     const archive = board.querySelector("[data-event-archive]");
     const archiveList = board.querySelector("[data-event-archive-list]");
+    const archiveCta = board.querySelector("[data-event-archive-cta]");
+    const archiveLink = board.querySelector("[data-event-archive-link]");
+    const directoryEmpty = board.querySelector("[data-event-directory-empty]");
+    const countTargets = new Map(
+      Array.from(board.querySelectorAll("[data-event-count]")).map((target) => [target.dataset.eventCount, target])
+    );
+    const categoryLinks = board.querySelectorAll("[data-event-category-link]");
 
     if (!source || !lists.size) {
       return;
     }
 
     lists.forEach((list) => list.replaceChildren());
+    lists.forEach((list) => {
+      const group = list.closest(".event-group");
+
+      if (group) {
+        group.hidden = false;
+      }
+    });
+    emptyStates.forEach((empty) => {
+      empty.hidden = false;
+    });
+    countTargets.forEach((target) => {
+      target.textContent = "0";
+    });
+
+    if (archiveList) {
+      archiveList.replaceChildren();
+    }
+
+    if (archive) {
+      archive.hidden = true;
+    }
+
+    if (archiveLink) {
+      archiveLink.hidden = true;
+    }
+
+    if (archiveCta) {
+      archiveCta.hidden = true;
+    }
+
+    if (directoryEmpty) {
+      directoryEmpty.hidden = true;
+    }
 
     fetch(source, { cache: "no-store" })
       .then((response) => {
@@ -331,6 +406,7 @@ if (facebookEventBoards.length) {
         const now = new Date();
         const today = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 12);
         const events = Array.isArray(data.events) ? data.events.filter((event) => event && typeof event === "object") : [];
+        const activeCounts = Object.fromEntries(eventTypes.map((type) => [type, 0]));
 
         events
           .slice()
@@ -342,33 +418,77 @@ if (facebookEventBoards.length) {
           .forEach((event) => {
             const state = getEventState(event, today);
             const card = createEventCard(event, state);
+            const type = getEventType(event);
 
             if (state === "archived" && archiveList) {
               archiveList.append(card);
               return;
             }
 
-            const type = slugify(event.type || "soiree-locale");
-            const targetList = lists.get(type) || lists.get("soiree-locale") || Array.from(lists.values())[0];
+            activeCounts[type] += 1;
+
+            const dance = getEventDanceSlug(event);
+            const targetKey = `${dance}:${type}`;
+            activeCounts[targetKey] = (activeCounts[targetKey] || 0) + 1;
+            const targetList = lists.get(`${dance}:${type}`) || lists.get(`wcs:${type}`) || Array.from(lists.values())[0];
 
             if (targetList) {
               targetList.append(card);
             }
           });
 
+        countTargets.forEach((target, type) => {
+          target.textContent = String(activeCounts[type] || 0);
+        });
+
+        categoryLinks.forEach((link) => {
+          const targetKey = link.dataset.eventCategoryLink;
+          const hasEvents = lists.get(targetKey)?.children.length > 0;
+
+          link.href = `#events-${targetKey.replace(":", "-")}`;
+          link.setAttribute("aria-disabled", String(!hasEvents));
+        });
+
         lists.forEach((list, type) => {
           const empty = emptyStates.get(type);
+          const group = list.closest(".event-group");
+          const hasEvents = list.children.length > 0;
 
           if (empty) {
-            empty.hidden = list.children.length > 0;
+            empty.hidden = hasEvents;
+          }
+
+          if (group) {
+            group.hidden = !hasEvents;
           }
         });
 
+        if (directoryEmpty) {
+          directoryEmpty.hidden = eventTypes.some((type) => activeCounts[type] > 0);
+        }
+
         if (archive && archiveList) {
-          archive.hidden = archiveList.children.length === 0;
+          const hasArchivedEvents = archiveList.children.length > 0;
+          archive.hidden = !hasArchivedEvents;
+
+          if (archiveLink) {
+            archiveLink.hidden = !hasArchivedEvents;
+          }
+
+          if (archiveCta) {
+            archiveCta.hidden = !hasArchivedEvents;
+          }
         }
       })
       .catch(() => {
+        lists.forEach((list) => {
+          const group = list.closest(".event-group");
+
+          if (group) {
+            group.hidden = true;
+          }
+        });
+
         emptyStates.forEach((empty) => {
           empty.hidden = false;
         });
@@ -377,6 +497,11 @@ if (facebookEventBoards.length) {
 
         if (firstEmpty) {
           firstEmpty.textContent = "Impossible de charger les événements pour le moment.";
+        }
+
+        if (directoryEmpty) {
+          directoryEmpty.hidden = false;
+          directoryEmpty.textContent = "Impossible de charger les événements pour le moment.";
         }
       });
   });
