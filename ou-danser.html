@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Repère les soirées régulières et les événements de West Coast Swing, Zouk brésilien et Blues à Québec.">
+  <meta name="theme-color" content="#171315">
+  <link rel="icon" type="image/png" sizes="256x256" href="assets/images/favicon.png?v=20260410-5">
+  <link rel="apple-touch-icon" href="assets/images/favicon.png?v=20260410-5">
+  <title>Où danser? | Pulsation Danse</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=20260411-8">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Aller au contenu</a>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="brand" href="index.html" aria-label="Pulsation Danse - retour à l'accueil">
+        <img class="brand__logo" src="assets/images/logo-pulsation.png" alt="" width="2584" height="1848">
+      </a>
+
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Ouvrir le menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="site-nav" id="site-nav" aria-label="Navigation principale">
+        <a href="index.html">Accueil</a>
+        <a href="cours.html">Cours</a>
+        <a href="horaire-et-tarifs.html">Horaire et tarifs</a>
+        <a href="ou-danser.html" aria-current="page">Où danser?</a>
+        <a href="a-propos.html">À propos</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="hero hero--inner">
+      <div class="hero__inner hero__inner--compact">
+        <div class="hero__copy" data-reveal>
+          <p class="eyebrow">Ou danser à Québec ?</p>
+          <h1>Envie d'apprendre ou de pratiquer un peu ?</h1>
+          <p class="lead">
+            Voici la liste des soirées régulières et des évènements spéciaux en liens avec le WCS, le Zouk et le Blues à Québec.
+          </p>
+          <div class="button-row">
+            <a class="btn btn--primary" href="#soirees-fixes">Soirées régulières</a>
+            <a class="btn btn--secondary" href="#evenements-facebook">Événements Facebook</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--light" id="soirees-fixes">
+      <div class="section__inner">
+        <div class="section-heading" data-reveal>
+          <p class="eyebrow eyebrow--dark">Soirées régulières</p>
+          <h2>Toutes les soirées régulières à Québec.</h2>
+        </div>
+
+        <div class="regular-night-grid">
+          <article class="regular-night-card regular-night-card--wcs" data-reveal>
+            <p class="card-tag">West Coast Swing</p>
+            <h3>Mardis WCS</h3>
+            <p>Chaque soirée comprends une activitée spéciale du type cours d'initiation, 
+            danse en ligne ou pratique dirrigée à 19h30. 
+            Ces soirées sont organisées par la communauté WCS de Québec.</p>
+            <dl class="regular-night-card__details">
+              <div>
+                <dt>Fréquence</dt>
+                <dd>Chaque mardis</dd>
+              </div>
+              <div>
+                <dt>Heure</dt>
+                <dd>20h30 à 23h</dd>
+              </div>
+              <div>
+                <dt>Lieu</dt>
+                <dd>
+                  <span class="venue-popover" data-venue-popover>
+                    <button class="venue-popover__trigger" type="button" aria-expanded="false">
+                      Studio L'Império
+                    </button>
+                    <span class="venue-popover__panel" hidden>
+                      <strong>Studio L'império</strong>
+                      <span>2323, Avenue Nérée-Tremblay, Rue Galvani, Québec, Qc, G1K 3G8</span>
+                    </span>
+                  </span>
+                </dd>
+              </div>
+            </dl>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--dark" id="evenements-facebook">
+      <div class="section__inner" data-facebook-events data-events-source="data/evenements.json">
+        <div class="section-heading" data-reveal>
+          <p class="eyebrow">Événements Facebook</p>
+          <h2>Les événements à suivre, classés pour aller droit au but.</h2>
+          <p>Les cartes seront alimentées par le fichier d'événements, puis les événements terminés passeront automatiquement dans les archives.</p>
+        </div>
+
+        <div class="event-board">
+          <section class="event-column event-column--session" data-reveal>
+            <div class="event-column__head">
+              <p class="card-tag">Session</p>
+              <h3>Sessions</h3>
+            </div>
+            <div class="event-list" data-event-list="session"></div>
+            <p class="event-empty" data-event-empty="session">Aucune session Facebook à afficher pour le moment.</p>
+          </section>
+
+          <section class="event-column event-column--local" data-reveal>
+            <div class="event-column__head">
+              <p class="card-tag">Soirée locale</p>
+              <h3>Soirées locales</h3>
+            </div>
+            <div class="event-list" data-event-list="soiree-locale"></div>
+            <p class="event-empty" data-event-empty="soiree-locale">Aucune soirée locale à afficher pour le moment.</p>
+          </section>
+
+          <section class="event-column event-column--weekender" data-reveal>
+            <div class="event-column__head">
+              <p class="card-tag">Weekender</p>
+              <h3>Weekenders</h3>
+            </div>
+            <div class="event-list" data-event-list="weekender"></div>
+            <p class="event-empty" data-event-empty="weekender">Aucun weekender à afficher pour le moment.</p>
+          </section>
+        </div>
+
+        <div class="event-archive" data-event-archive hidden>
+          <div class="event-archive__head">
+            <p class="eyebrow">Archives</p>
+            <h3>Événements passés</h3>
+            <p>Cette section se mettra à jour automatiquement quand la date de fin d'un événement sera dépassée.</p>
+          </div>
+          <div class="event-archive__grid" data-event-archive-list></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <div>
+        <a class="brand brand--footer" href="index.html" aria-label="Pulsation Danse - retour à l'accueil">
+          <img class="brand__logo" src="assets/images/logo-pulsation.png" alt="" width="2584" height="1848">
+        </a>
+        <p class="site-footer__lead">
+          Soirées régulières et événements de danse à Québec, rassemblés dans un format simple à maintenir.
+        </p>
+      </div>
+
+      <div>
+        <p class="site-footer__title">Navigation</p>
+        <ul class="footer-links">
+          <li><a href="cours.html">Cours</a></li>
+          <li><a href="horaire-et-tarifs.html">Horaire et tarifs</a></li>
+          <li><a href="ou-danser.html">Où danser?</a></li>
+          <li><a href="a-propos.html">À propos</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="site-footer__title">Contact</p>
+        <ul class="footer-links">
+          <li><a href="tel:4185297636">418-529-7636</a></li>
+          <li>Cours donnés dans différents studios partenaires à Québec</li>
+          <li><a href="mailto:grondin_gate@yahoo.ca">grondin_gate@yahoo.ca</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="site-footer__meta">© <span data-year></span> Pulsation Danse.</p>
+  </footer>
+
+  <script src="js/main.js?v=20260411-2"></script>
+</body>
+</html>

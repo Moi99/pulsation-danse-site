@@ -16,6 +16,8 @@ const videoStyleName = document.querySelector("[data-video-style-name]");
 const videoPlaceholderLabel = document.querySelector("[data-video-placeholder-label]");
 const videoModalTitle = document.querySelector("#video-modal-title");
 const videoModalCloseButton = document.querySelector(".video-modal__close");
+const facebookEventBoards = document.querySelectorAll("[data-facebook-events]");
+const venuePopovers = document.querySelectorAll("[data-venue-popover]");
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
 const lerp = (start, end, amount) => start + (end - start) * amount;
@@ -73,6 +75,53 @@ yearTargets.forEach((target) => {
   target.textContent = new Date().getFullYear();
 });
 
+if (venuePopovers.length) {
+  const closeVenuePopovers = (except = null) => {
+    venuePopovers.forEach((popover) => {
+      if (popover === except) {
+        return;
+      }
+
+      const trigger = popover.querySelector(".venue-popover__trigger");
+      const panel = popover.querySelector(".venue-popover__panel");
+
+      if (trigger && panel) {
+        trigger.setAttribute("aria-expanded", "false");
+        panel.hidden = true;
+      }
+    });
+  };
+
+  venuePopovers.forEach((popover) => {
+    const trigger = popover.querySelector(".venue-popover__trigger");
+    const panel = popover.querySelector(".venue-popover__panel");
+
+    if (!trigger || !panel) {
+      return;
+    }
+
+    trigger.addEventListener("click", (event) => {
+      event.stopPropagation();
+
+      const isOpen = trigger.getAttribute("aria-expanded") === "true";
+      closeVenuePopovers(popover);
+      trigger.setAttribute("aria-expanded", String(!isOpen));
+      panel.hidden = isOpen;
+    });
+
+    popover.addEventListener("click", (event) => {
+      event.stopPropagation();
+    });
+  });
+
+  document.addEventListener("click", () => closeVenuePopovers());
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeVenuePopovers();
+    }
+  });
+}
+
 document.querySelectorAll("[data-session-calendar]").forEach((calendar) => {
   const sessionCards = calendar.querySelectorAll("[data-session-start]");
   const durationDays = Number.parseInt(calendar.dataset.sessionDurationDays || "49", 10);
@@ -116,6 +165,222 @@ document.querySelectorAll("[data-session-calendar]").forEach((calendar) => {
     }
   });
 });
+
+if (facebookEventBoards.length) {
+  const eventDateFormatter = new Intl.DateTimeFormat("fr-CA", {
+    day: "numeric",
+    month: "long",
+    year: "numeric"
+  });
+
+  const slugify = (value) =>
+    String(value || "")
+      .trim()
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+
+  const createTextElement = (tagName, className, text) => {
+    const element = document.createElement(tagName);
+    element.className = className;
+    element.textContent = text;
+    return element;
+  };
+
+  const getEventDances = (event) => {
+    if (Array.isArray(event.dance)) {
+      return event.dance;
+    }
+
+    if (Array.isArray(event.dances)) {
+      return event.dances;
+    }
+
+    if (event.dance) {
+      return [event.dance];
+    }
+
+    return [];
+  };
+
+  const formatEventDateRange = (event) => {
+    const startDate = parseLocalDate(event.date);
+    const endDate = parseLocalDate(event.endDate);
+
+    if (!startDate || Number.isNaN(startDate.getTime())) {
+      return "Date à confirmer";
+    }
+
+    if (endDate && !Number.isNaN(endDate.getTime()) && endDate > startDate) {
+      return `${eventDateFormatter.format(startDate)} au ${eventDateFormatter.format(endDate)}`;
+    }
+
+    return eventDateFormatter.format(startDate);
+  };
+
+  const getEventState = (event, today) => {
+    const startDate = parseLocalDate(event.date);
+    const endDate = parseLocalDate(event.endDate || event.date);
+
+    if (!startDate || !endDate || Number.isNaN(startDate.getTime()) || Number.isNaN(endDate.getTime())) {
+      return "upcoming";
+    }
+
+    if (endDate < today) {
+      return "archived";
+    }
+
+    if (startDate <= today && today <= endDate) {
+      return "current";
+    }
+
+    return "upcoming";
+  };
+
+  const addEventPlaceholder = (media, label) => {
+    media.replaceChildren(createTextElement("span", "event-card__placeholder", label || "Événement"));
+  };
+
+  const createEventCard = (event, state) => {
+    const card = document.createElement(event.url ? "a" : "article");
+    const title = event.title || "Événement à nommer";
+    const dances = getEventDances(event).filter(Boolean);
+    const metaParts = [formatEventDateRange(event), event.time, event.location].filter(Boolean);
+
+    card.className = `event-card is-${state}`;
+
+    if (event.url) {
+      card.href = event.url;
+      card.target = "_blank";
+      card.rel = "noopener noreferrer";
+      card.setAttribute("aria-label", `${title} - ouvrir l'événement Facebook`);
+    }
+
+    const media = document.createElement("div");
+    media.className = "event-card__media";
+
+    if (event.image) {
+      const image = document.createElement("img");
+      image.src = event.image;
+      image.alt = event.imageAlt || "";
+      image.loading = "lazy";
+      image.addEventListener("error", () => addEventPlaceholder(media, dances[0] || "Événement"));
+      media.append(image);
+    } else {
+      addEventPlaceholder(media, dances[0] || "Événement");
+    }
+
+    const bodyContent = document.createElement("div");
+    bodyContent.className = "event-card__body";
+
+    const badges = document.createElement("div");
+    badges.className = "event-card__badges";
+
+    dances.forEach((dance) => {
+      const badge = createTextElement("span", `event-badge event-badge--${slugify(dance)}`, dance);
+      badges.append(badge);
+    });
+
+    if (state === "current") {
+      badges.append(createTextElement("span", "event-badge", "En cours"));
+    }
+
+    if (badges.children.length) {
+      bodyContent.append(badges);
+    }
+
+    bodyContent.append(createTextElement("h4", "event-card__title", title));
+    bodyContent.append(createTextElement("p", "event-card__meta", metaParts.join(" · ")));
+
+    if (event.url) {
+      bodyContent.append(createTextElement("span", "event-card__link", "Voir sur Facebook"));
+    }
+
+    card.append(media, bodyContent);
+    return card;
+  };
+
+  facebookEventBoards.forEach((board) => {
+    const source = board.dataset.eventsSource;
+    const lists = new Map(
+      Array.from(board.querySelectorAll("[data-event-list]")).map((list) => [list.dataset.eventList, list])
+    );
+    const emptyStates = new Map(
+      Array.from(board.querySelectorAll("[data-event-empty]")).map((empty) => [empty.dataset.eventEmpty, empty])
+    );
+    const archive = board.querySelector("[data-event-archive]");
+    const archiveList = board.querySelector("[data-event-archive-list]");
+
+    if (!source || !lists.size) {
+      return;
+    }
+
+    lists.forEach((list) => list.replaceChildren());
+
+    fetch(source, { cache: "no-store" })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Impossible de charger ${source}`);
+        }
+
+        return response.json();
+      })
+      .then((data) => {
+        const now = new Date();
+        const today = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 12);
+        const events = Array.isArray(data.events) ? data.events.filter((event) => event && typeof event === "object") : [];
+
+        events
+          .slice()
+          .sort((first, second) => {
+            const firstDate = parseLocalDate(first.date);
+            const secondDate = parseLocalDate(second.date);
+            return (firstDate?.getTime() || 0) - (secondDate?.getTime() || 0);
+          })
+          .forEach((event) => {
+            const state = getEventState(event, today);
+            const card = createEventCard(event, state);
+
+            if (state === "archived" && archiveList) {
+              archiveList.append(card);
+              return;
+            }
+
+            const type = slugify(event.type || "soiree-locale");
+            const targetList = lists.get(type) || lists.get("soiree-locale") || Array.from(lists.values())[0];
+
+            if (targetList) {
+              targetList.append(card);
+            }
+          });
+
+        lists.forEach((list, type) => {
+          const empty = emptyStates.get(type);
+
+          if (empty) {
+            empty.hidden = list.children.length > 0;
+          }
+        });
+
+        if (archive && archiveList) {
+          archive.hidden = archiveList.children.length === 0;
+        }
+      })
+      .catch(() => {
+        emptyStates.forEach((empty) => {
+          empty.hidden = false;
+        });
+
+        const firstEmpty = emptyStates.values().next().value;
+
+        if (firstEmpty) {
+          firstEmpty.textContent = "Impossible de charger les événements pour le moment.";
+        }
+      });
+  });
+}
 
 if (form && formNote) {
   form.addEventListener("submit", (event) => {
