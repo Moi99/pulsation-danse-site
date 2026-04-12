@@ -1,0 +1,4 @@
+tools/PulsationEventManager/bin/
+tools/PulsationEventManager/obj/
+tools/PulsationEventManager/*.user
+tools/dist/PulsationEventManager/*.pdb

@@ -16,6 +16,12 @@ const videoStyleName = document.querySelector("[data-video-style-name]");
 const videoPlaceholderLabel = document.querySelector("[data-video-placeholder-label]");
 const videoModalTitle = document.querySelector("#video-modal-title");
 const videoModalCloseButton = document.querySelector(".video-modal__close");
+const bioModal = document.querySelector("[data-bio-modal]");
+const bioTriggers = document.querySelectorAll("[data-bio-trigger]");
+const bioCloseControls = document.querySelectorAll("[data-bio-close]");
+const bioModalTitle = document.querySelector("#bio-modal-title");
+const bioModalText = document.querySelector("[data-bio-modal-text]");
+const bioModalCloseButton = document.querySelector(".bio-modal__close");
 const facebookEventBoards = document.querySelectorAll("[data-facebook-events]");
 const venuePopovers = document.querySelectorAll("[data-venue-popover]");
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -35,6 +41,7 @@ const parseLocalDate = (value) => {
   return new Date(year, month - 1, day, 12);
 };
 let lastVideoTrigger = null;
+let lastBioTrigger = null;
 
 const closeMenu = () => {
   if (!menuToggle || !siteNav) {
@@ -171,9 +178,9 @@ document.querySelectorAll("[data-session-calendar]").forEach((calendar) => {
 if (facebookEventBoards.length) {
   const eventTypes = ["session", "soiree-locale", "weekender"];
   const eventDanceGroups = [
-    { slug: "wcs", aliases: ["wcs", "west-coast-swing"] },
-    { slug: "zouk", aliases: ["zouk", "zouk-bresilien"] },
-    { slug: "blues", aliases: ["blues"] }
+    { slug: "wcs", label: "WCS", aliases: ["wcs", "west-coast-swing"] },
+    { slug: "zouk", label: "Zouk", aliases: ["zouk", "zouk-bresilien"] },
+    { slug: "blues", label: "Blues", aliases: ["blues"] }
   ];
   const eventDateFormatter = new Intl.DateTimeFormat("fr-CA", {
     day: "numeric",
@@ -231,13 +238,84 @@ if (facebookEventBoards.length) {
     return eventTypes.includes(type) ? type : "soiree-locale";
   };
 
-  const getEventDanceSlug = (event) => {
+  const getEventDanceSlugs = (event) => {
     const dances = getEventDances(event).map(slugify);
-    const match = eventDanceGroups.find((group) =>
-      dances.some((dance) => dance === group.slug || group.aliases.includes(dance))
-    );
+    const matches = eventDanceGroups
+      .filter((group) => dances.some((dance) => dance === group.slug || group.aliases.includes(dance)))
+      .map((group) => group.slug);
 
-    return match?.slug || "wcs";
+    return matches.length ? matches : ["wcs"];
+  };
+
+  const getEventDanceLabel = (danceSlug) =>
+    eventDanceGroups.find((group) => group.slug === danceSlug)?.label || String(danceSlug || "").toUpperCase();
+
+  const getEventStartTime = (event) => {
+    const startDate = parseLocalDate(event.date);
+
+    return startDate && !Number.isNaN(startDate.getTime()) ? startDate.getTime() : Number.MAX_SAFE_INTEGER;
+  };
+
+  const getEventSelection = (selectionKey) => {
+    const [danceValue, typeValue] = String(selectionKey || "").split(":");
+    const dance = slugify(danceValue);
+
+    if (!eventDanceGroups.some((group) => group.slug === dance)) {
+      return null;
+    }
+
+    const type = typeValue ? getEventType({ type: typeValue }) : null;
+
+    return {
+      dance,
+      type,
+      key: type ? `${dance}:${type}` : dance
+    };
+  };
+
+  const getEventSortRank = (event, selection) => {
+    if (!selection) {
+      return 0;
+    }
+
+    if (!getEventDanceSlugs(event).includes(selection.dance)) {
+      return 2;
+    }
+
+    if (!selection.type) {
+      return 0;
+    }
+
+    return getEventType(event) === selection.type ? 0 : 1;
+  };
+
+  const sortEventItems = (items, selection) =>
+    items.slice().sort((first, second) => {
+      const rankDifference = getEventSortRank(first.event, selection) - getEventSortRank(second.event, selection);
+
+      if (rankDifference) {
+        return rankDifference;
+      }
+
+      const dateDifference = getEventStartTime(first.event) - getEventStartTime(second.event);
+
+      if (dateDifference) {
+        return dateDifference;
+      }
+
+      return String(first.event.title || "").localeCompare(String(second.event.title || ""), "fr");
+    });
+
+  const formatEventType = (type) => {
+    if (type === "session") {
+      return "Session";
+    }
+
+    if (type === "weekender") {
+      return "Weekender";
+    }
+
+    return "Soirée locale";
   };
 
   const formatEventDateRange = (event) => {
@@ -282,6 +360,9 @@ if (facebookEventBoards.length) {
     const card = document.createElement(event.url ? "a" : "article");
     const title = event.title || "Événement à nommer";
     const dances = getEventDances(event).filter(Boolean);
+    const type = getEventType(event);
+    const danceSlugs = getEventDanceSlugs(event);
+    const badgeDanceText = danceSlugs.map(getEventDanceLabel).join(" / ");
     const metaParts = [formatEventDateRange(event), event.time, event.location].filter(Boolean);
 
     card.className = `event-card is-${state}`;
@@ -301,10 +382,10 @@ if (facebookEventBoards.length) {
       image.src = event.image;
       image.alt = event.imageAlt || "";
       image.loading = "lazy";
-      image.addEventListener("error", () => addEventPlaceholder(media, dances[0] || "Événement"));
+      image.addEventListener("error", () => addEventPlaceholder(media, badgeDanceText || dances[0] || "Événement"));
       media.append(image);
     } else {
-      addEventPlaceholder(media, dances[0] || "Événement");
+      addEventPlaceholder(media, badgeDanceText || dances[0] || "Événement");
     }
 
     const bodyContent = document.createElement("div");
@@ -313,10 +394,7 @@ if (facebookEventBoards.length) {
     const badges = document.createElement("div");
     badges.className = "event-card__badges";
 
-    dances.forEach((dance) => {
-      const badge = createTextElement("span", `event-badge event-badge--${slugify(dance)}`, dance);
-      badges.append(badge);
-    });
+    badges.append(createTextElement("span", `event-badge event-badge--${danceSlugs[0]}`, `${formatEventType(type)} - ${badgeDanceText}`));
 
     if (state === "current") {
       badges.append(createTextElement("span", "event-badge", "En cours"));
@@ -339,52 +417,25 @@ if (facebookEventBoards.length) {
 
   facebookEventBoards.forEach((board) => {
     const source = board.dataset.eventsSource;
-    const lists = new Map(
-      Array.from(board.querySelectorAll("[data-event-list]")).map((list) => [list.dataset.eventList, list])
-    );
-    const emptyStates = new Map(
-      Array.from(board.querySelectorAll("[data-event-empty]")).map((empty) => [empty.dataset.eventEmpty, empty])
-    );
-    const archive = board.querySelector("[data-event-archive]");
-    const archiveList = board.querySelector("[data-event-archive-list]");
+    const activeList = board.querySelector("[data-event-list='active']");
+    const listSection = board.querySelector("#events-active-list") || board.querySelector("#liste-evenements");
+    const listTitle = board.querySelector("[data-event-list-title]");
     const archiveCta = board.querySelector("[data-event-archive-cta]");
-    const archiveLink = board.querySelector("[data-event-archive-link]");
+    const archiveToggle = board.querySelector("[data-event-archive-toggle]");
     const directoryEmpty = board.querySelector("[data-event-directory-empty]");
     const countTargets = new Map(
       Array.from(board.querySelectorAll("[data-event-count]")).map((target) => [target.dataset.eventCount, target])
     );
     const categoryLinks = board.querySelectorAll("[data-event-category-link]");
 
-    if (!source || !lists.size) {
+    if (!source || !activeList) {
       return;
     }
 
-    lists.forEach((list) => list.replaceChildren());
-    lists.forEach((list) => {
-      const group = list.closest(".event-group");
-
-      if (group) {
-        group.hidden = false;
-      }
-    });
-    emptyStates.forEach((empty) => {
-      empty.hidden = false;
-    });
+    activeList.replaceChildren();
     countTargets.forEach((target) => {
       target.textContent = "0";
     });
-
-    if (archiveList) {
-      archiveList.replaceChildren();
-    }
-
-    if (archive) {
-      archive.hidden = true;
-    }
-
-    if (archiveLink) {
-      archiveLink.hidden = true;
-    }
 
     if (archiveCta) {
       archiveCta.hidden = true;
@@ -394,19 +445,35 @@ if (facebookEventBoards.length) {
       directoryEmpty.hidden = true;
     }
 
-    fetch(source, { cache: "no-store" })
+    const embeddedEvents = window.PULSATION_EVENTS && typeof window.PULSATION_EVENTS === "object"
+      ? window.PULSATION_EVENTS
+      : null;
+    const sourceUrl = `${source}${source.includes("?") ? "&" : "?"}v=${Date.now()}`;
+
+    fetch(sourceUrl, { cache: "no-store" })
       .then((response) => {
         if (!response.ok) {
-          throw new Error(`Impossible de charger ${source}`);
+          throw new Error(`Impossible de charger ${sourceUrl}`);
         }
 
         return response.json();
+      })
+      .catch((error) => {
+        if (embeddedEvents) {
+          return embeddedEvents;
+        }
+
+        throw error;
       })
       .then((data) => {
         const now = new Date();
         const today = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 12);
         const events = Array.isArray(data.events) ? data.events.filter((event) => event && typeof event === "object") : [];
         const activeCounts = Object.fromEntries(eventTypes.map((type) => [type, 0]));
+        const activeEventItems = [];
+        const archivedEventItems = [];
+        let activeSelection = null;
+        let isShowingArchives = false;
 
         events
           .slice()
@@ -417,87 +484,128 @@ if (facebookEventBoards.length) {
           })
           .forEach((event) => {
             const state = getEventState(event, today);
-            const card = createEventCard(event, state);
             const type = getEventType(event);
+            const danceSlugs = getEventDanceSlugs(event);
 
-            if (state === "archived" && archiveList) {
-              archiveList.append(card);
+            if (state === "archived") {
+              archivedEventItems.push({ event, state });
               return;
             }
 
+            activeEventItems.push({ event, state });
             activeCounts[type] += 1;
+            danceSlugs.forEach((dance) => {
+              activeCounts[dance] = (activeCounts[dance] || 0) + 1;
+              activeCounts[`${dance}:${type}`] = (activeCounts[`${dance}:${type}`] || 0) + 1;
+            });
+          });
 
-            const dance = getEventDanceSlug(event);
-            const targetKey = `${dance}:${type}`;
-            activeCounts[targetKey] = (activeCounts[targetKey] || 0) + 1;
-            const targetList = lists.get(`${dance}:${type}`) || lists.get(`wcs:${type}`) || Array.from(lists.values())[0];
+        const renderActiveEvents = (selection = null) => {
+          activeSelection = selection;
+          isShowingArchives = false;
+          activeList.replaceChildren();
 
-            if (targetList) {
-              targetList.append(card);
+          sortEventItems(activeEventItems, activeSelection).forEach(({ event, state }) => {
+            activeList.append(createEventCard(event, state));
+          });
+
+          if (listTitle) {
+            listTitle.textContent = "Événements en cours et à venir.";
+          }
+
+          if (directoryEmpty) {
+            directoryEmpty.hidden = activeEventItems.length > 0;
+            directoryEmpty.textContent = "Aucun événement actif à afficher pour le moment.";
+          }
+
+          if (archiveToggle) {
+            archiveToggle.setAttribute("aria-pressed", "false");
+            archiveToggle.textContent = "Voir les archives";
+          }
+
+          categoryLinks.forEach((link) => {
+            const linkSelection = getEventSelection(link.dataset.eventCategoryLink);
+            const isCurrent = linkSelection && activeSelection && linkSelection.key === activeSelection.key;
+
+            if (isCurrent) {
+              link.setAttribute("aria-current", "true");
+            } else {
+              link.removeAttribute("aria-current");
             }
           });
+        };
+
+        const renderArchivedEvents = () => {
+          activeSelection = null;
+          isShowingArchives = true;
+          activeList.replaceChildren();
+
+          sortEventItems(archivedEventItems, null).forEach(({ event, state }) => {
+            activeList.append(createEventCard(event, state));
+          });
+
+          if (listTitle) {
+            listTitle.textContent = "Événements archivés.";
+          }
+
+          if (directoryEmpty) {
+            directoryEmpty.hidden = archivedEventItems.length > 0;
+            directoryEmpty.textContent = "Aucun événement archivé à afficher pour le moment.";
+          }
+
+          if (archiveToggle) {
+            archiveToggle.setAttribute("aria-pressed", "true");
+            archiveToggle.textContent = "Événements courants";
+          }
+
+          categoryLinks.forEach((link) => {
+            link.removeAttribute("aria-current");
+          });
+        };
 
         countTargets.forEach((target, type) => {
           target.textContent = String(activeCounts[type] || 0);
         });
 
         categoryLinks.forEach((link) => {
-          const targetKey = link.dataset.eventCategoryLink;
-          const hasEvents = lists.get(targetKey)?.children.length > 0;
+          const selection = getEventSelection(link.dataset.eventCategoryLink);
 
-          link.href = `#events-${targetKey.replace(":", "-")}`;
-          link.setAttribute("aria-disabled", String(!hasEvents));
+          link.href = "#events-active-list";
+          link.removeAttribute("aria-disabled");
+          link.addEventListener("click", (event) => {
+            event.preventDefault();
+
+            renderActiveEvents(selection);
+            listSection?.scrollIntoView({
+              behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+              block: "start"
+            });
+          });
         });
 
-        lists.forEach((list, type) => {
-          const empty = emptyStates.get(type);
-          const group = list.closest(".event-group");
-          const hasEvents = list.children.length > 0;
+        renderActiveEvents();
 
-          if (empty) {
-            empty.hidden = hasEvents;
-          }
-
-          if (group) {
-            group.hidden = !hasEvents;
-          }
-        });
-
-        if (directoryEmpty) {
-          directoryEmpty.hidden = eventTypes.some((type) => activeCounts[type] > 0);
+        if (archiveCta) {
+          archiveCta.hidden = false;
         }
 
-        if (archive && archiveList) {
-          const hasArchivedEvents = archiveList.children.length > 0;
-          archive.hidden = !hasArchivedEvents;
+        if (archiveToggle) {
+          archiveToggle.addEventListener("click", () => {
+            if (isShowingArchives) {
+              renderActiveEvents();
+            } else {
+              renderArchivedEvents();
+            }
 
-          if (archiveLink) {
-            archiveLink.hidden = !hasArchivedEvents;
-          }
-
-          if (archiveCta) {
-            archiveCta.hidden = !hasArchivedEvents;
-          }
+            listSection?.scrollIntoView({
+              behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+              block: "start"
+            });
+          });
         }
       })
       .catch(() => {
-        lists.forEach((list) => {
-          const group = list.closest(".event-group");
-
-          if (group) {
-            group.hidden = true;
-          }
-        });
-
-        emptyStates.forEach((empty) => {
-          empty.hidden = false;
-        });
-
-        const firstEmpty = emptyStates.values().next().value;
-
-        if (firstEmpty) {
-          firstEmpty.textContent = "Impossible de charger les événements pour le moment.";
-        }
+        activeList.replaceChildren();
 
         if (directoryEmpty) {
           directoryEmpty.hidden = false;
@@ -511,6 +619,56 @@ if (form && formNote) {
   form.addEventListener("submit", (event) => {
     event.preventDefault();
     formNote.textContent = "Le formulaire de cette V1 est en attente de l'adresse courriel finale et de son integration.";
+  });
+}
+
+const closeBioModal = () => {
+  if (!bioModal) {
+    return;
+  }
+
+  bioModal.hidden = true;
+  body.classList.remove("modal-open");
+
+  if (lastBioTrigger) {
+    lastBioTrigger.focus();
+  }
+};
+
+if (bioModal && bioTriggers.length) {
+  const openBioModal = (trigger) => {
+    const fullBio = trigger.querySelector("[data-bio-full]")?.textContent?.trim();
+    const previewBio = trigger.querySelector("[data-bio-preview]")?.textContent?.trim();
+
+    if (bioModalTitle) {
+      bioModalTitle.textContent = trigger.dataset.bioTitle || "Bio";
+    }
+
+    if (bioModalText) {
+      bioModalText.textContent = fullBio || previewBio || "";
+    }
+
+    lastBioTrigger = trigger;
+    bioModal.hidden = false;
+    body.classList.add("modal-open");
+
+    if (bioModalCloseButton) {
+      bioModalCloseButton.focus();
+    }
+  };
+
+  bioTriggers.forEach((trigger) => {
+    trigger.addEventListener("click", () => openBioModal(trigger));
+  });
+
+  bioCloseControls.forEach((control) => {
+    control.addEventListener("click", closeBioModal);
+  });
+
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !bioModal.hidden) {
+      closeBioModal();
+    }
   });
 }
 
