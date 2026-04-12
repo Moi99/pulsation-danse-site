@@ -618,7 +618,7 @@ if (facebookEventBoards.length) {
 if (form && formNote) {
   form.addEventListener("submit", (event) => {
     event.preventDefault();
-    formNote.textContent = "Le formulaire de cette V1 est en attente de l'adresse courriel finale et de son integration.";
+    formNote.textContent = "Le formulaire sera activé à l'étape de mise en ligne. Pour l'instant, écris directement à grondin_gate@yahoo.ca.";
   });
 }
 

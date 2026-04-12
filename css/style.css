@@ -2546,6 +2546,7 @@ main,
   display: grid;
   grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
   gap: 1.4rem;
+  --contact-accent-line: linear-gradient(180deg, var(--accent-copper) 0%, rgba(181, 123, 134, 0.58) 54%, rgba(92, 39, 56, 0.24) 100%);
 }
 
 .contact-layout__details {
@@ -2553,10 +2554,127 @@ main,
   gap: 1.2rem;
 }
 
+.contact-quick {
+  position: relative;
+  overflow: hidden;
+  align-self: start;
+  padding: clamp(1.4rem, 3vw, 1.9rem);
+  border-radius: var(--radius-m);
+  border: 1px solid rgba(70, 52, 60, 0.08);
+  background:
+    radial-gradient(circle at top right, rgba(255, 255, 255, 0.78), transparent 36%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(249, 242, 236, 0.78));
+  box-shadow: var(--shadow-soft);
+}
+
+.contact-quick::after,
+.contact-quick__list li::after,
+.form-panel::after,
+.contact-form__control::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 0 solid transparent;
+  border-left-width: 4px;
+  background-image: var(--contact-accent-line);
+  background-origin: border-box;
+  background-clip: border-box;
+  -webkit-mask:
+    linear-gradient(#000 0 0) padding-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) padding-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.contact-quick__head h2 {
+  margin: 0;
+  color: var(--text-dark);
+  font-size: clamp(2.25rem, 5vw, 3.3rem);
+  line-height: 0.94;
+}
+
+.contact-quick__list {
+  display: grid;
+  gap: 0.65rem;
+  margin: clamp(1.4rem, 3vw, 1.9rem) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.contact-quick__list li {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: minmax(7.5rem, 0.42fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 1rem;
+  padding: 0.9rem 1rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(92, 39, 56, 0.18);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(248, 239, 231, 0.78)),
+    rgba(255, 255, 255, 0.86);
+  box-shadow: 0 14px 30px rgba(36, 24, 29, 0.1);
+}
+
+.contact-quick__list span {
+  color: var(--accent-plum);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.contact-quick__list a {
+  justify-self: start;
+  color: var(--text-dark);
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+.contact-quick__list a[target="_blank"] {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.48rem 0.78rem;
+  border-radius: 999px;
+  border: 1px solid rgba(201, 151, 117, 0.34);
+  background: linear-gradient(135deg, #f1ddcf 0%, var(--accent-copper-light) 42%, var(--accent-copper) 100%);
+  color: #1d1418;
+  box-shadow: 0 14px 26px rgba(201, 151, 117, 0.2);
+  transition: transform var(--transition), background var(--transition), border-color var(--transition);
+}
+
+.contact-quick__list a[target="_blank"]::after {
+  content: "↗";
+  font-size: 0.85em;
+  line-height: 1;
+}
+
+.contact-quick__list a[target="_blank"]:hover,
+.contact-quick__list a[target="_blank"]:focus-visible {
+  transform: translateY(-2px);
+  border-color: rgba(201, 151, 117, 0.52);
+  background: linear-gradient(135deg, #f5e6db 0%, #eacbb4 40%, #c99675 100%);
+}
+
+
 .form-panel h2 {
   margin: 0 0 1rem;
   font-size: clamp(2rem, 5vw, 3.1rem);
   line-height: 0.98;
+}
+
+.form-panel {
+  position: relative;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.62);
+  box-shadow: var(--shadow-soft);
 }
 
 .contact-form {
@@ -2569,6 +2687,33 @@ main,
   gap: 0.45rem;
   color: var(--text-dark);
   font-weight: 700;
+}
+
+.contact-form :is(input, textarea, select) {
+  display: block;
+  padding-left: 1.2rem;
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.contact-form :is(input, textarea, select):focus {
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(181, 123, 134, 0.15);
+}
+
+.contact-form__control {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: 1rem;
+  transition: box-shadow var(--transition);
+}
+
+.contact-form__control:focus-within {
+  box-shadow: 0 0 0 4px rgba(181, 123, 134, 0.15);
+}
+
+.contact-form__control:focus-within :is(input, textarea, select) {
+  box-shadow: none;
 }
 
 .form-note {

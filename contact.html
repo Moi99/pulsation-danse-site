@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=20260411-23">
+  <link rel="stylesheet" href="css/style.css?v=20260412-10">
 </head>
 <body>
   <a class="skip-link" href="#main-content">Aller au contenu</a>
@@ -52,59 +52,75 @@
     <section class="section section--light">
       <div class="section__inner">
         <div class="contact-layout">
-          <div class="contact-layout__details">
-            <article class="contact-card" data-reveal>
-              <p class="card-tag">Téléphone</p>
-              <h2><a href="tel:4185297636">418-529-7636</a></h2>
-              <p>Pour une prise de contact directe ou pour obtenir des précisions sur les cours et les sessions.</p>
-            </article>
+          <div class="contact-layout__details contact-quick" data-reveal>
+            <div class="contact-quick__head">
+              <p class="eyebrow eyebrow--dark">Coordonnées</p>
+              <h2>Contact direct</h2>
+            </div>
 
-            <article class="contact-card" data-reveal>
-              <p class="card-tag">Courriel</p>
-              <h2><a href="mailto:grondin_gate@yahoo.ca">grondin_gate@yahoo.ca</a></h2>
-              <p>Vous pouvez déjà nous écrire directement à cette adresse pour toute question sur les cours et les sessions.</p>
-            </article>
-
-            <article class="contact-card" data-reveal>
-              <p class="card-tag">Lieux de cours</p>
-              <h2>Studios partenaires à Québec</h2>
-              <p>Les lieux sont communiqués selon la session, le style de danse et les collaborations en cours.</p>
-            </article>
+            <ul class="contact-quick__list">
+              <li>
+                <span>Téléphone</span>
+                <a href="tel:4185297636">418-529-7636</a>
+              </li>
+              <li>
+                <span>Courriel</span>
+                <a href="mailto:grondin_gate@yahoo.ca">grondin_gate@yahoo.ca</a>
+              </li>
+              <li>
+                <span>Facebook</span>
+                <a href="https://www.facebook.com/pulsationdanse" target="_blank" rel="noopener noreferrer">Pulsation Danse</a>
+              </li>
+              <li>
+                <span>Facebook</span>
+                <a href="https://www.facebook.com/gaetan.grondin.31" target="_blank" rel="noopener noreferrer">Gaétan Grondin</a>
+              </li>
+            </ul>
           </div>
 
           <div class="contact-layout__form" data-reveal>
             <div class="form-panel">
               <p class="eyebrow eyebrow--dark">Formulaire</p>
-              <h2>Une structure prête pour la connexion finale.</h2>
+              <h2>Écris-nous.</h2>
               <form class="contact-form" data-placeholder-form>
                 <label>
                   Nom
-                  <input type="text" name="nom" placeholder="Votre nom" required>
+                  <span class="contact-form__control">
+                    <input type="text" name="nom" placeholder="Votre nom" required>
+                  </span>
                 </label>
                 <label>
                   Courriel
-                  <input type="email" name="courriel" placeholder="votre@courriel.com" required>
+                  <span class="contact-form__control">
+                    <input type="email" name="courriel" placeholder="votre@courriel.com" required>
+                  </span>
                 </label>
                 <label>
                   Téléphone
-                  <input type="tel" name="telephone" placeholder="Optionnel">
+                  <span class="contact-form__control">
+                    <input type="tel" name="telephone" placeholder="Optionnel">
+                  </span>
                 </label>
                 <label>
                   Sujet
-                  <select name="sujet">
-                    <option>Cours de groupe</option>
-                    <option>Cours privés</option>
-                    <option>Horaire et tarifs</option>
-                    <option>Question générale</option>
-                  </select>
+                  <span class="contact-form__control">
+                    <select name="sujet">
+                      <option>Cours de groupe</option>
+                      <option>Cours privés</option>
+                      <option>Horaire et tarifs</option>
+                      <option>Question générale</option>
+                    </select>
+                  </span>
                 </label>
                 <label>
                   Message
-                  <textarea name="message" rows="5" placeholder="Décrivez votre question ou votre intérêt."></textarea>
+                  <span class="contact-form__control">
+                    <textarea name="message" rows="5" placeholder="Décrivez votre question ou votre intérêt."></textarea>
+                  </span>
                 </label>
                 <button class="btn btn--primary" type="submit">Envoyer la demande</button>
                 <p class="form-note" data-form-note>
-                  Démonstration V1: le formulaire sera relié à grondin_gate@yahoo.ca lors de la prochaine étape.
+                  Le formulaire sera activé à l'étape de mise en ligne.
                 </p>
               </form>
             </div>
@@ -113,29 +129,6 @@
       </div>
     </section>
 
-    <section class="section section--dark">
-      <div class="section__inner">
-        <div class="split-panel split-panel--reverse">
-          <div class="split-panel__content" data-reveal>
-            <p class="eyebrow">Besoin d'être orienté?</p>
-            <h2>Il suffit de décrire le style qui vous attire ou le type de cours recherché.</h2>
-            <p>
-              La page est organisée pour rassurer les personnes qui ne savent pas encore si elles
-              veulent commencer par un cours de groupe, un cours privé ou un style précis.
-            </p>
-            <ul class="bullet-list">
-              <li>West Coast Swing, Zouk Brésilien ou Blues</li>
-              <li>Cours de groupe ou cours privés</li>
-              <li>Informations de session et lieux à Québec</li>
-            </ul>
-          </div>
-
-          <div class="split-panel__media placeholder-media placeholder-media--contact" data-reveal>
-            <span>Photo d'accueil ou scène relationnelle à intégrer</span>
-          </div>
-        </div>
-      </div>
-    </section>
   </main>
 
   <footer class="site-footer">
@@ -144,7 +137,7 @@
         <a class="brand brand--footer" href="index.html" aria-label="Pulsation Danse - retour à l'accueil">
           <img class="brand__logo" src="assets/images/logo-pulsation.png" alt="" width="2584" height="1848">
         </a>
-        <p class="site-footer__lead">Un point de contact simple et rassurant, prêt à être connecté aux coordonnées finales.</p>
+        <p class="site-footer__lead">Téléphone, courriel et liens sociaux de Pulsation Danse.</p>
       </div>
 
       <div>
@@ -171,6 +164,6 @@
     <p class="site-footer__meta">© <span data-year></span> Pulsation Danse.</p>
   </footer>
 
-  <script src="js/main.js?v=20260411-20"></script>
+  <script src="js/main.js?v=20260412-1"></script>
 </body>
 </html>
