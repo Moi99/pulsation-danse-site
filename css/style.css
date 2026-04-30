@@ -1169,6 +1169,24 @@ main,
   letter-spacing: 0.02em;
 }
 
+.photo-panel {
+  position: relative;
+  overflow: hidden;
+  min-height: 17rem;
+  padding: 0;
+  border-radius: var(--radius-m);
+  background: rgba(35, 24, 30, 0.94);
+}
+
+.photo-panel img {
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
 .placeholder-media--wcs {
   background:
     linear-gradient(160deg, rgba(171, 112, 123, 0.34), transparent 48%),
