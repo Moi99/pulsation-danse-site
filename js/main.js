@@ -6,7 +6,7 @@ const menuToggle = document.querySelector(".menu-toggle");
 const siteNav = document.querySelector(".site-nav");
 const navLinks = document.querySelectorAll(".site-nav a");
 const yearTargets = document.querySelectorAll("[data-year]");
-const form = document.querySelector("[data-placeholder-form]");
+const form = document.querySelector("[data-contact-form]");
 const formNote = document.querySelector("[data-form-note]");
 const glowSurfaces = document.querySelectorAll(".hero, .section--dark, .site-footer");
 const videoModal = document.querySelector("[data-video-modal]");
@@ -615,10 +615,67 @@ if (facebookEventBoards.length) {
   });
 }
 
+const syncContactSubject = () => {
+  if (!form) {
+    return;
+  }
+
+  const subjectField = form.querySelector("input[name='_subject']");
+  const name = form.querySelector("[name='nom']")?.value?.trim().replace(/\s+/g, " ");
+  const topic = form.querySelector("[name='sujet']")?.value?.trim();
+  const parts = ["Pulsation Danse", topic || "Nouvelle demande", name].filter(Boolean);
+
+  if (subjectField) {
+    subjectField.value = parts.join(" - ");
+  }
+};
+
 if (form && formNote) {
   form.addEventListener("submit", (event) => {
+    syncContactSubject();
+
+    if (!window.fetch || !window.FormData) {
+      return;
+    }
+
     event.preventDefault();
-    formNote.textContent = "Le formulaire sera activé à l'étape de mise en ligne. Pour l'instant, écris directement à grondin_gate@yahoo.ca.";
+    const submitButton = form.querySelector("[type='submit']");
+    const defaultSubmitText = submitButton?.textContent || "Envoyer la demande";
+
+    formNote.classList.remove("is-error", "is-success");
+    formNote.textContent = "Envoi en cours...";
+
+    if (submitButton) {
+      submitButton.disabled = true;
+      submitButton.textContent = "Envoi...";
+    }
+
+    fetch(form.action, {
+      method: "POST",
+      body: new FormData(form),
+      headers: {
+        Accept: "application/json"
+      }
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("formspree-error");
+        }
+
+        form.reset();
+        formNote.classList.add("is-success");
+        formNote.textContent = "Merci. Ton message a bien été envoyé.";
+      })
+      .catch(() => {
+        formNote.classList.add("is-error");
+        formNote.textContent = "L'envoi n'a pas fonctionné. Écris directement à info@pulsationdanse.ca.";
+      })
+      .finally(() => {
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.textContent = defaultSubmitText;
+        }
+      });
   });
 }
 

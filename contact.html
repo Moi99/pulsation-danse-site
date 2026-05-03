@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=20260412-31">
+  <link rel="stylesheet" href="css/style.css?v=20260501-1">
 </head>
 <body>
   <a class="skip-link" href="#main-content">Aller au contenu</a>
@@ -65,7 +65,7 @@
               </li>
               <li>
                 <span>Courriel</span>
-                <a href="mailto:grondin_gate@yahoo.ca">grondin_gate@yahoo.ca</a>
+                <a href="mailto:info@pulsationdanse.ca">info@pulsationdanse.ca</a>
               </li>
               <li>
                 <span>Facebook</span>
@@ -82,23 +82,24 @@
             <div class="form-panel">
               <p class="eyebrow eyebrow--dark">Formulaire</p>
               <h2>Écris-nous.</h2>
-              <form class="contact-form" data-placeholder-form>
+              <form class="contact-form" action="https://formspree.io/f/xzdozgdy" method="POST" data-contact-form>
+                <input type="hidden" name="_subject" value="Pulsation Danse - Nouvelle demande">
                 <label>
                   Nom
                   <span class="contact-form__control">
-                    <input type="text" name="nom" placeholder="Ton nom" required>
+                    <input type="text" name="nom" placeholder="Ton nom" autocomplete="name" required>
                   </span>
                 </label>
                 <label>
                   Courriel
                   <span class="contact-form__control">
-                    <input type="email" name="courriel" placeholder="ton@courriel.com" required>
+                    <input type="email" name="email" placeholder="ton@courriel.com" autocomplete="email" required>
                   </span>
                 </label>
                 <label>
                   Téléphone
                   <span class="contact-form__control">
-                    <input type="tel" name="telephone" placeholder="Optionnel">
+                    <input type="tel" name="telephone" placeholder="Optionnel" autocomplete="tel">
                   </span>
                 </label>
                 <label>
@@ -115,12 +116,12 @@
                 <label>
                   Message
                   <span class="contact-form__control">
-                    <textarea name="message" rows="5" placeholder="Une question?"></textarea>
+                    <textarea name="message" rows="5" placeholder="Une question?" required></textarea>
                   </span>
                 </label>
                 <button class="btn btn--primary" type="submit">Envoyer la demande</button>
-                <p class="form-note" data-form-note>
-                  Le formulaire sera activé à l'étape de mise en ligne.
+                <p class="form-note" data-form-note role="status" aria-live="polite">
+                  Les messages sont envoyés à info@pulsationdanse.ca.
                 </p>
               </form>
             </div>
@@ -155,7 +156,7 @@
         <p class="site-footer__title">Contact</p>
         <ul class="footer-links">
           <li><a href="tel:4185297636">Téléphone: 418-529-7636</a></li>
-          <li><a href="mailto:grondin_gate@yahoo.ca">Courriel: grondin_gate@yahoo.ca</a></li>
+          <li><a href="mailto:info@pulsationdanse.ca">Courriel: info@pulsationdanse.ca</a></li>
           <li><a href="https://www.facebook.com/pulsationdanse" target="_blank" rel="noopener noreferrer">Facebook: Pulsation Danse</a></li>
           <li><a href="https://www.facebook.com/gaetan.grondin.31" target="_blank" rel="noopener noreferrer">Facebook: Gaétan Grondin</a></li>
         </ul>
@@ -164,6 +165,6 @@
 
   </footer>
 
-  <script src="js/main.js?v=20260412-1"></script>
+  <script src="js/main.js?v=20260503-1"></script>
 </body>
 </html>

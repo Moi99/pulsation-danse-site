@@ -2755,6 +2755,22 @@ main,
   font-size: 0.92rem;
 }
 
+.form-note.is-success {
+  color: #326551;
+  font-weight: 700;
+}
+
+.form-note.is-error {
+  color: #8a2f3a;
+  font-weight: 700;
+}
+
+.contact-form .btn:disabled {
+  cursor: progress;
+  opacity: 0.72;
+  transform: none;
+}
+
 .cta-panel {
   --curved-accent-width: 5px;
   --curved-accent-line: linear-gradient(180deg, rgba(201, 151, 117, 0.94), rgba(181, 123, 134, 0.58), rgba(92, 39, 56, 0.26));
