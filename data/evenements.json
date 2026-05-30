@@ -57,6 +57,62 @@
       "type": "weekender",
       "image": "assets/images/events/zouk-de-zero-a-heros.png",
       "imageAlt": ""
+    },
+    {
+      "title": "Soir\u00E9e Zouk Vibe",
+      "url": "https://www.facebook.com/events/1461394428577871/",
+      "date": "2026-06-05",
+      "endDate": "",
+      "time": "20h",
+      "location": "",
+      "dance": [
+        "Zouk"
+      ],
+      "type": "soiree-locale",
+      "image": "assets/images/events/soiree-zouk-vibe.png",
+      "imageAlt": ""
+    },
+    {
+      "title": "Samedi WESTI!",
+      "url": "https://www.facebook.com/events/1306635957603539",
+      "date": "2026-06-06",
+      "endDate": "",
+      "time": "20h",
+      "location": "",
+      "dance": [
+        "WCS"
+      ],
+      "type": "soiree-locale",
+      "image": "assets/images/events/samedi-westi.jpg",
+      "imageAlt": ""
+    },
+    {
+      "title": "Cours de West Coast Swing",
+      "url": "https://www.facebook.com/events/994264066339564",
+      "date": "2026-06-10",
+      "endDate": "",
+      "time": "18h30",
+      "location": "",
+      "dance": [
+        "WCS"
+      ],
+      "type": "session",
+      "image": "assets/images/events/cours-de-west-coast-swing.jpg",
+      "imageAlt": ""
+    },
+    {
+      "title": "ZOUK fest de la St-Jean",
+      "url": "https://www.facebook.com/events/2009543233778629",
+      "date": "2026-06-26",
+      "endDate": "2026-06-28",
+      "time": "19h30",
+      "location": "",
+      "dance": [
+        "Zouk"
+      ],
+      "type": "weekender",
+      "image": "assets/images/events/zouk-fest-de-la-st-jean.jpg",
+      "imageAlt": ""
     }
   ]
 }

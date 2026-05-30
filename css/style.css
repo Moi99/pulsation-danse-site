@@ -1103,6 +1103,11 @@ main,
   overflow: hidden;
 }
 
+.style-preview .photo-panel {
+  min-height: 0;
+  aspect-ratio: 4 / 3;
+}
+
 .style-preview--link {
   display: block;
   color: inherit;
@@ -1185,6 +1190,51 @@ main,
   object-fit: cover;
   object-position: center;
   display: block;
+}
+
+.photo-panel--zouk-home {
+  min-height: 0;
+  aspect-ratio: 4 / 3;
+}
+
+.photo-panel--zouk-home img {
+  min-height: 0;
+  object-position: center 22%;
+}
+
+.style-block__media--wcs {
+  min-height: 0;
+  background: transparent;
+}
+
+.style-block__media--wcs img {
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  object-fit: unset;
+  object-position: initial;
+}
+
+.style-block__media--zouk {
+  min-height: 0;
+  aspect-ratio: 1 / 1;
+}
+
+.style-block__media--zouk img {
+  min-height: 0;
+  object-fit: cover;
+  object-position: center 18%;
+}
+
+.style-block__media--blues {
+  min-height: 0;
+  aspect-ratio: 43 / 50;
+}
+
+.style-block__media--blues img {
+  min-height: 0;
+  object-fit: cover;
+  object-position: center 12%;
 }
 
 .placeholder-media--wcs {
@@ -1350,6 +1400,17 @@ main,
   margin-bottom: 1.6rem;
 }
 
+.engagement-panel__media {
+  min-height: 0;
+  aspect-ratio: 1 / 1;
+}
+
+.engagement-panel__media img {
+  min-height: 0;
+  object-fit: cover;
+  object-position: center 18%;
+}
+
 .teacher-stack {
   display: grid;
   gap: clamp(1.1rem, 2.5vw, 1.6rem);
@@ -1420,6 +1481,16 @@ main,
   object-fit: cover;
   object-position: center;
   display: block;
+}
+
+.teacher-profile__photo--loise {
+  min-height: 0;
+  aspect-ratio: 1 / 0.96;
+}
+
+.teacher-profile__photo--loise img {
+  min-height: 0;
+  object-position: 51% 18%;
 }
 
 .teacher-profile__bio {
@@ -1957,6 +2028,10 @@ main,
 
 .regular-night-card--wcs {
   --night-accent: var(--accent-copper);
+}
+
+.regular-night-card--zouk {
+  --night-accent: var(--accent-rose);
 }
 
 .regular-night-card h3,
