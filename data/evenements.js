@@ -101,6 +101,20 @@ window.PULSATION_EVENTS = {
       "imageAlt": ""
     },
     {
+      "title": "Cours de ZOUK",
+      "url": "https://www.facebook.com/events/1715686989876437",
+      "date": "2026-06-15",
+      "endDate": "",
+      "time": "18h30",
+      "location": "",
+      "dance": [
+        "Zouk"
+      ],
+      "type": "session",
+      "image": "assets/images/events/cours-de-zouk.jpg",
+      "imageAlt": ""
+    },
+    {
       "title": "ZOUK fest de la St-Jean",
       "url": "https://www.facebook.com/events/2009543233778629",
       "date": "2026-06-26",

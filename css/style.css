@@ -139,6 +139,18 @@ select:focus {
   top: 1rem;
 }
 
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+  padding: 0;
+}
+
 .site-header {
   position: sticky;
   top: 0;
@@ -806,6 +818,10 @@ main,
   --schedule-v2-accent: var(--accent-copper);
 }
 
+.schedule-v2__day--paused {
+  --schedule-v2-accent: rgba(226, 197, 177, 0.52);
+}
+
 .schedule-v2__day--wednesday {
   --schedule-v2-accent: var(--accent-plum);
 }
@@ -879,6 +895,18 @@ main,
   line-height: 1.45;
 }
 
+.schedule-v2__pause-note {
+  margin: 1rem 0 0;
+  padding: 0.95rem 1rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(226, 197, 177, 0.14);
+  background: rgba(248, 241, 235, 0.055);
+  color: var(--text-muted-light);
+  font-size: 0.94rem;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
 .schedule-v2--dark .schedule-v2__day {
   color: var(--text-light);
   background:
@@ -898,6 +926,31 @@ main,
     rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 20px 40px rgba(7, 5, 6, 0.22);
+}
+
+.schedule-v2--dark .schedule-v2__day--paused {
+  background:
+    repeating-linear-gradient(
+      -45deg,
+      rgba(248, 241, 235, 0.045) 0,
+      rgba(248, 241, 235, 0.045) 1px,
+      transparent 1px,
+      transparent 12px
+    ),
+    radial-gradient(circle at top right, rgba(226, 197, 177, 0.08), transparent 32%),
+    linear-gradient(180deg, rgba(34, 27, 31, 0.98), rgba(20, 16, 18, 0.98));
+  border-color: rgba(226, 197, 177, 0.16);
+}
+
+.schedule-v2--dark .schedule-v2__slot--paused {
+  border-color: rgba(226, 197, 177, 0.18);
+  background:
+    linear-gradient(145deg, rgba(226, 197, 177, 0.08), rgba(255, 255, 255, 0.025)),
+    rgba(255, 255, 255, 0.03);
+}
+
+.schedule-v2--dark .schedule-v2__slot--paused .schedule-v2__course {
+  color: var(--accent-copper-light);
 }
 
 .schedule-v2--dark .schedule-v2__course {
@@ -1199,7 +1252,7 @@ main,
 
 .photo-panel--zouk-home img {
   min-height: 0;
-  object-position: center 22%;
+  object-position: 54% 12%;
 }
 
 .style-block__media--wcs {
