@@ -6,6 +6,9 @@ namespace PulsationEventManager;
 
 public partial class Form1 : Form
 {
+    private readonly FacebookEventImporter facebookImporter = new();
+    private readonly GitPublisher gitPublisher = new();
+
     private readonly JsonSerializerOptions jsonOptions = new()
     {
         WriteIndented = true,
@@ -32,7 +35,10 @@ public partial class Form1 : Form
     private Label statusLabel = null!;
     private Button saveButton = null!;
     private Button deleteButton = null!;
+    private Button importFacebookButton = null!;
     private Button openFacebookButton = null!;
+    private Button publishButton = null!;
+    private CheckBox publishAfterSaveInput = null!;
 
     public Form1()
     {
@@ -53,7 +59,7 @@ public partial class Form1 : Form
 
     private void BuildUi()
     {
-        Text = "Pulsation Danse - Gestion des événements Facebook";
+        Text = "Pulsation Danse - Gestion des événements Facebook (import v11)";
         MinimumSize = new Size(1060, 720);
         Size = new Size(1180, 780);
         StartPosition = FormStartPosition.CenterScreen;
@@ -176,7 +182,7 @@ public partial class Form1 : Form
         buttons.Controls.Add(newButton);
 
         saveButton = new Button { AutoSize = true, Text = "Enregistrer" };
-        saveButton.Click += (_, _) => SaveCurrentEvent();
+        saveButton.Click += async (_, _) => await SaveCurrentEventAsync(publishAfterSaveInput.Checked);
         buttons.Controls.Add(saveButton);
 
         deleteButton = new Button { AutoSize = true, Text = "Supprimer" };
@@ -258,6 +264,10 @@ public partial class Form1 : Form
         panel.Controls.Add(actionRow, 1, 11);
         panel.SetColumnSpan(actionRow, 2);
 
+        importFacebookButton = new Button { AutoSize = true, Text = "Importer depuis Facebook" };
+        importFacebookButton.Click += async (_, _) => await ImportFromFacebookAsync();
+        actionRow.Controls.Add(importFacebookButton);
+
         openFacebookButton = new Button { AutoSize = true, Text = "Ouvrir Facebook" };
         openFacebookButton.Click += (_, _) => OpenFacebookUrl();
         actionRow.Controls.Add(openFacebookButton);
@@ -265,6 +275,19 @@ public partial class Form1 : Form
         var openJsonButton = new Button { AutoSize = true, Text = "Ouvrir le JSON" };
         openJsonButton.Click += (_, _) => OpenFile(eventsPath);
         actionRow.Controls.Add(openJsonButton);
+
+        publishButton = new Button { AutoSize = true, Text = "Commit + push" };
+        publishButton.Click += async (_, _) => await PublishGeneratedFilesAsync(eventList.SelectedItem as EventItem);
+        actionRow.Controls.Add(publishButton);
+
+        publishAfterSaveInput = new CheckBox
+        {
+            AutoSize = true,
+            Checked = true,
+            Margin = new Padding(12, 6, 0, 0),
+            Text = "Publier automatiquement"
+        };
+        actionRow.Controls.Add(publishAfterSaveInput);
     }
 
     private TextBox AddTextRow(TableLayoutPanel panel, int row, string label, string placeholder)
@@ -309,6 +332,7 @@ public partial class Form1 : Form
 
         var store = ReadStore();
         WriteJavaScriptStore(store);
+        WriteStructuredData(store);
         events.Clear();
         events.AddRange(store.Events.OrderBy(item => item.Date).ThenBy(item => item.Title));
         RefreshEventList();
@@ -338,6 +362,7 @@ public partial class Form1 : Form
         };
         File.WriteAllText(eventsPath, JsonSerializer.Serialize(store, jsonOptions));
         WriteJavaScriptStore(store);
+        WriteStructuredData(store);
     }
 
     private void WriteJavaScriptStore(EventStore store)
@@ -346,6 +371,18 @@ public partial class Form1 : Form
         var json = JsonSerializer.Serialize(store, jsonOptions);
         var script = $"window.PULSATION_EVENTS = {json};{Environment.NewLine}";
         File.WriteAllText(eventsScriptPath, script);
+    }
+
+    private void WriteStructuredData(EventStore store)
+    {
+        try
+        {
+            EventStructuredDataWriter.UpdateOuDanser(siteRoot, store.Events);
+        }
+        catch (Exception ex)
+        {
+            SetStatus($"Événements enregistrés, mais JSON-LD non mis à jour: {ex.Message}");
+        }
     }
 
     private void RefreshEventList()
@@ -414,12 +451,12 @@ public partial class Form1 : Form
         SetStatus("Nouvel événement prêt à remplir.");
     }
 
-    private void SaveCurrentEvent()
+    private async Task<EventItem?> SaveCurrentEventAsync(bool publishAfterSave)
     {
         if (!ValidateForm(out var message))
         {
             MessageBox.Show(message, "Information manquante", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            return;
+            return null;
         }
 
         var item = eventList.SelectedItem as EventItem ?? new EventItem();
@@ -444,6 +481,158 @@ public partial class Form1 : Form
         RefreshEventList();
         eventList.SelectedItem = item;
         SetStatus("Événement enregistré.");
+
+        if (publishAfterSave)
+        {
+            await PublishGeneratedFilesAsync(item);
+        }
+
+        return item;
+    }
+
+    private async Task ImportFromFacebookAsync()
+    {
+        if (string.IsNullOrWhiteSpace(siteRoot))
+        {
+            MessageBox.Show("Choisis d'abord le dossier du site.", "Dossier manquant", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(urlInput.Text))
+        {
+            MessageBox.Show("Colle d'abord l'URL de l'événement Facebook dans le champ URL Facebook.", "URL manquante", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            urlInput.Focus();
+            return;
+        }
+
+        SetBusy(true);
+
+        try
+        {
+            SetStatus("Import Facebook en cours...");
+            var result = await facebookImporter.ImportAsync(urlInput.Text.Trim(), siteRoot);
+
+            if (!result.HasEssentialData || result.ImportMode == "Fallback manuel")
+            {
+                SetStatus("Facebook bloque l'import direct. Ouverture du navigateur intégré...");
+                Cursor = Cursors.Default;
+
+                using var browserImport = new FacebookBrowserImportForm(result.Item.Url, facebookImporter, siteRoot);
+                if (browserImport.ShowDialog(this) == DialogResult.OK && browserImport.Result is not null)
+                {
+                    result = browserImport.Result;
+                }
+
+                Cursor = Cursors.WaitCursor;
+            }
+
+            var message = $"Import terminé via {result.ImportMode}.";
+            if (result.Warnings.Count > 0)
+            {
+                message += $"{Environment.NewLine}{Environment.NewLine}{string.Join(Environment.NewLine, result.Warnings)}";
+            }
+
+            ApplyImportedEvent(result.Item);
+            SetStatus(message.Replace(Environment.NewLine, " "));
+
+            if (!result.HasEssentialData)
+            {
+                MessageBox.Show($"{message}\n\nCertaines informations manquent. Complète le formulaire à la main, puis clique Enregistrer.", "Fallback manuel requis", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            await SaveCurrentEventAsync(publishAfterSaveInput.Checked);
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"L'import automatique n'a pas fonctionné.\n\n{ex.Message}\n\nTu peux remplir le formulaire à la main comme avant.", "Import Facebook", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            SetStatus("Import automatique échoué. Fallback manuel disponible.");
+        }
+        finally
+        {
+            SetBusy(false);
+        }
+    }
+
+    private void ApplyImportedEvent(EventItem item)
+    {
+        titleInput.Text = item.Title;
+        urlInput.Text = item.Url;
+        dateInput.Text = item.Date;
+        endDateInput.Text = item.EndDate;
+        timeInput.Text = item.Time;
+        locationInput.Text = item.Location;
+        typeInput.SelectedItem = string.IsNullOrWhiteSpace(item.Type) ? "soiree-locale" : item.Type;
+        imageInput.Text = item.Image;
+        imageAltInput.Text = item.ImageAlt;
+
+        for (var index = 0; index < danceInput.Items.Count; index++)
+        {
+            var value = danceInput.Items[index]?.ToString() ?? "";
+            danceInput.SetItemChecked(index, item.Dance.Any(dance => string.Equals(dance, value, StringComparison.OrdinalIgnoreCase)));
+        }
+    }
+
+    private async Task PublishGeneratedFilesAsync(EventItem? item)
+    {
+        if (string.IsNullOrWhiteSpace(siteRoot))
+        {
+            return;
+        }
+
+        SetBusy(true);
+
+        try
+        {
+            SetStatus("Commit + push en cours...");
+            var result = await gitPublisher.PublishAsync(siteRoot, GetGeneratedPaths(item));
+            var details = string.Join($"{Environment.NewLine}{Environment.NewLine}", result.Messages);
+
+            if (!result.Success)
+            {
+                MessageBox.Show($"Le commit/push automatique n'a pas fonctionné.\n\n{details}", "Git", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                SetStatus("Commit/push échoué. Vérifie Git ou publie manuellement.");
+                return;
+            }
+
+            SetStatus("Commit + push terminé.");
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Le commit/push automatique n'a pas fonctionné.\n\n{ex.Message}", "Git", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            SetStatus("Commit/push échoué. Vérifie Git ou publie manuellement.");
+        }
+        finally
+        {
+            SetBusy(false);
+        }
+    }
+
+    private IEnumerable<string> GetGeneratedPaths(EventItem? item)
+    {
+        yield return "data/evenements.json";
+        yield return "data/evenements.js";
+        yield return "ou-danser.html";
+
+        var image = item?.Image ?? imageInput.Text.Trim();
+        if (!string.IsNullOrWhiteSpace(image))
+        {
+            var normalized = NormalizeAssetPath(image);
+            if (File.Exists(Path.Combine(siteRoot, normalized.Replace('/', Path.DirectorySeparatorChar))))
+            {
+                yield return normalized;
+            }
+        }
+    }
+
+    private void SetBusy(bool isBusy)
+    {
+        importFacebookButton.Enabled = !isBusy;
+        saveButton.Enabled = !isBusy;
+        deleteButton.Enabled = !isBusy;
+        publishButton.Enabled = !isBusy;
+        openFacebookButton.Enabled = !isBusy;
+        Cursor = isBusy ? Cursors.WaitCursor : Cursors.Default;
     }
 
     private void DeleteCurrentEvent()
