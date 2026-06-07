@@ -171,6 +171,20 @@ window.PULSATION_EVENTS = {
       "imageAlt": "Discussions"
     },
     {
+      "title": "WCS // Mardis de juin \u00E0 l\u0027Imperio",
+      "url": "https://www.facebook.com/events/1982335515987058/1982335522653724",
+      "date": "2026-06-09",
+      "endDate": "",
+      "time": "19h30",
+      "location": "Studio L\u0027Imp\u00E9rio",
+      "dance": [
+        "WCS"
+      ],
+      "type": "soiree-locale",
+      "image": "",
+      "imageAlt": "Discussions"
+    },
+    {
       "title": "Cours de West Coast Swing",
       "url": "https://www.facebook.com/events/994264066339564",
       "date": "2026-06-10",
