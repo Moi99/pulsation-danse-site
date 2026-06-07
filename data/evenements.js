@@ -59,6 +59,20 @@ window.PULSATION_EVENTS = {
       "imageAlt": ""
     },
     {
+      "title": "Discussions",
+      "url": "https://www.facebook.com/events/1982335515987058/1982335522653724",
+      "date": "2026-06-04",
+      "endDate": "2026-06-07",
+      "time": "14h",
+      "location": "Studio L\u0027Imp\u00E9rio",
+      "dance": [
+        "WCS"
+      ],
+      "type": "soiree-locale",
+      "image": "",
+      "imageAlt": "Discussions"
+    },
+    {
       "title": "Soir\u00E9e Zouk Vibe",
       "url": "https://www.facebook.com/events/1461394428577871/",
       "date": "2026-06-05",
