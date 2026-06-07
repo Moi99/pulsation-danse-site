@@ -28,7 +28,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=20260606-1">
+  <link rel="stylesheet" href="css/style.css?v=20260607-1">
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -87,6 +87,122 @@
           },
           "about": {
             "@id": "https://pulsationdanse.ca/#organization"
+          }
+        }
+      ]
+    }
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "LocalBusiness",
+          "@id": "https://pulsationdanse.ca/#organization",
+          "name": "Pulsation Danse",
+          "alternateName": "Pulsation Danse Québec",
+          "description": "École de danse à Québec offrant des cours de West Coast Swing, Zouk brésilien et Blues pour adultes.",
+          "url": "https://pulsationdanse.ca/",
+          "logo": "https://pulsationdanse.ca/assets/images/logo-pulsation.png",
+          "image": [
+            "https://pulsationdanse.ca/assets/images/social-preview-pulsation-danse-1200x630.jpg",
+            "https://pulsationdanse.ca/assets/photos/cours-groupe-pulsation.jpg",
+            "https://pulsationdanse.ca/assets/images/logo-pulsation-1200x1200.png"
+          ],
+          "telephone": "+1-418-529-7636",
+          "email": "info@pulsationdanse.ca",
+          "priceRange": "$",
+          "currenciesAccepted": "CAD",
+          "foundingDate": "2014",
+          "areaServed": {
+            "@type": "City",
+            "name": "Québec"
+          },
+          "knowsAbout": [
+            "West Coast Swing",
+            "Zouk brésilien",
+            "Blues",
+            "danse sociale",
+            "danse de couple",
+            "connection-based partner dance"
+          ],
+          "sameAs": [
+            "https://www.facebook.com/pulsationdanse",
+            "https://www.facebook.com/gaetan.grondin.31"
+          ],
+          "contactPoint": [
+            {
+              "@type": "ContactPoint",
+              "contactType": "customer service",
+              "telephone": "+1-418-529-7636",
+              "email": "info@pulsationdanse.ca",
+              "availableLanguage": [
+                "fr-CA",
+                "fr"
+              ]
+            }
+          ],
+          "location": [
+            {
+              "@id": "https://pulsationdanse.ca/#studio-salsa-attitude"
+            },
+            {
+              "@id": "https://pulsationdanse.ca/#studio-imperio"
+            }
+          ],
+          "makesOffer": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@id": "https://pulsationdanse.ca/cours-west-coast-swing-quebec.html#course"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@id": "https://pulsationdanse.ca/cours-zouk-bresilien-quebec.html#course"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@id": "https://pulsationdanse.ca/cours-blues-quebec.html#course"
+              }
+            },
+            {
+              "@type": "Offer",
+              "price": "60",
+              "priceCurrency": "CAD",
+              "itemOffered": {
+                "@id": "https://pulsationdanse.ca/cours-prives-danse-quebec.html#course"
+              }
+            }
+          ]
+        },
+        {
+          "@type": "Place",
+          "@id": "https://pulsationdanse.ca/#studio-salsa-attitude",
+          "name": "Studio Salsa Attitude",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "3188 Chemin Ste-Foy",
+            "addressLocality": "Québec",
+            "addressRegion": "QC",
+            "postalCode": "G1X 1R4",
+            "addressCountry": "CA"
+          }
+        },
+        {
+          "@type": "Place",
+          "@id": "https://pulsationdanse.ca/#studio-imperio",
+          "name": "Studio L'Império",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "2323 Avenue Nérée-Tremblay",
+            "addressLocality": "Québec",
+            "addressRegion": "QC",
+            "postalCode": "G1K 3G8",
+            "addressCountry": "CA"
           }
         }
       ]
@@ -159,7 +275,7 @@
         </div>
 
         <div class="card-grid card-grid--three">
-          <a class="style-preview style-preview--link" href="cours.html#west-coast-swing" data-reveal>
+          <a class="style-preview style-preview--link" href="cours-west-coast-swing-quebec.html" data-reveal>
             <div class="photo-panel">
               <img src="assets/photos/accueil-west-coast-swing.jpg" alt="West Coast Swing chez Pulsation Danse" width="1000" height="667" loading="lazy">
             </div>
@@ -167,7 +283,7 @@
             <p>Un style souple et moderne, où l'écoute musicale rencontre la précision et le jeu.</p>
           </a>
 
-          <a class="style-preview style-preview--link" href="cours.html#zouk-bresilien" data-reveal>
+          <a class="style-preview style-preview--link" href="cours-zouk-bresilien-quebec.html" data-reveal>
             <div class="photo-panel photo-panel--zouk-home">
               <img src="assets/photos/accueil-zouk-bresilien.png" alt="Zouk Brésilien chez Pulsation Danse" width="1212" height="1298" loading="lazy">
             </div>
@@ -175,7 +291,7 @@
             <p>Un langage fluide, organique et continu, porté par la connexion et la circulation du mouvement.</p>
           </a>
 
-          <a class="style-preview style-preview--link" href="cours.html#blues" data-reveal>
+          <a class="style-preview style-preview--link" href="cours-blues-quebec.html" data-reveal>
             <div class="photo-panel">
               <img src="assets/photos/accueil-blues.jpg" alt="Blues chez Pulsation Danse" width="2048" height="1365" loading="lazy">
             </div>

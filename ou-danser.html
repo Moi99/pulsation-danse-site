@@ -28,7 +28,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=20260606-1">
+  <link rel="stylesheet" href="css/style.css?v=20260607-1">
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -74,6 +74,81 @@
             "@id": "https://pulsationdanse.ca/#website"
           },
           "about": {
+            "@id": "https://pulsationdanse.ca/#organization"
+          }
+        }
+      ]
+    }
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Place",
+          "@id": "https://pulsationdanse.ca/#studio-salsa-attitude",
+          "name": "Studio Salsa Attitude",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "3188 Chemin Ste-Foy",
+            "addressLocality": "Québec",
+            "addressRegion": "QC",
+            "postalCode": "G1X 1R4",
+            "addressCountry": "CA"
+          }
+        },
+        {
+          "@type": "Place",
+          "@id": "https://pulsationdanse.ca/#studio-imperio",
+          "name": "Studio L'Império",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "2323 Avenue Nérée-Tremblay",
+            "addressLocality": "Québec",
+            "addressRegion": "QC",
+            "postalCode": "G1K 3G8",
+            "addressCountry": "CA"
+          }
+        },
+        {
+          "@type": "Event",
+          "@id": "https://pulsationdanse.ca/ou-danser.html#event-cours-west-coast-swing-2026-06-10",
+          "name": "Cours de West Coast Swing",
+          "description": "Session de cours de West Coast Swing à Québec avec Pulsation Danse.",
+          "url": "https://www.facebook.com/events/994264066339564",
+          "startDate": "2026-06-10T18:30:00-04:00",
+          "eventStatus": "https://schema.org/EventScheduled",
+          "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+          "image": [
+            "https://pulsationdanse.ca/assets/images/events/cours-de-west-coast-swing.jpg",
+            "https://pulsationdanse.ca/assets/images/social-preview-pulsation-danse-1200x630.jpg",
+            "https://pulsationdanse.ca/assets/images/logo-pulsation-1200x1200.png"
+          ],
+          "location": {
+            "@id": "https://pulsationdanse.ca/#studio-salsa-attitude"
+          },
+          "organizer": {
+            "@id": "https://pulsationdanse.ca/#organization"
+          }
+        },
+        {
+          "@type": "Event",
+          "@id": "https://pulsationdanse.ca/ou-danser.html#event-cours-zouk-2026-06-15",
+          "name": "Cours de Zouk",
+          "description": "Session de cours de Zouk brésilien à Québec avec Pulsation Danse.",
+          "url": "https://www.facebook.com/events/1715686989876437",
+          "startDate": "2026-06-15T18:30:00-04:00",
+          "eventStatus": "https://schema.org/EventScheduled",
+          "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+          "image": [
+            "https://pulsationdanse.ca/assets/images/events/cours-de-zouk.jpg",
+            "https://pulsationdanse.ca/assets/images/social-preview-pulsation-danse-1200x630.jpg",
+            "https://pulsationdanse.ca/assets/images/logo-pulsation-1200x1200.png"
+          ],
+          "location": {
+            "@id": "https://pulsationdanse.ca/#studio-imperio"
+          },
+          "organizer": {
             "@id": "https://pulsationdanse.ca/#organization"
           }
         }
