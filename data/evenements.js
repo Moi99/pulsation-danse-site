@@ -115,20 +115,6 @@ window.PULSATION_EVENTS = {
       "imageAlt": ""
     },
     {
-      "title": "\u00C9v\u00E8nements",
-      "url": "https://www.facebook.com/events/3063584443834619/",
-      "date": "2026-06-12",
-      "endDate": "",
-      "time": "20h30",
-      "location": "",
-      "dance": [
-        "WCS"
-      ],
-      "type": "soiree-locale",
-      "image": "assets/images/events/evenements-2.jpg",
-      "imageAlt": "\u00C9v\u00E8nements"
-    },
-    {
       "title": "Cours de ZOUK",
       "url": "https://www.facebook.com/events/1715686989876437",
       "date": "2026-06-15",
