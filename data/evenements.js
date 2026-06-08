@@ -141,6 +141,20 @@ window.PULSATION_EVENTS = {
       "type": "weekender",
       "image": "assets/images/events/zouk-fest-de-la-st-jean.jpg",
       "imageAlt": ""
+    },
+    {
+      "title": "\u00C9v\u00E8nements",
+      "url": "https://www.facebook.com/events/3063584443834619/",
+      "date": "2026-07-09",
+      "endDate": "",
+      "time": "11h",
+      "location": "",
+      "dance": [
+        "WCS"
+      ],
+      "type": "soiree-locale",
+      "image": "assets/images/events/evenements.jpg",
+      "imageAlt": "\u00C9v\u00E8nements"
     }
   ]
 };
