@@ -899,7 +899,7 @@ public sealed class FacebookEventImporter
 
         if (normalized.Contains("imperio"))
         {
-            return "Studio L'Império";
+            return "Studio Império";
         }
 
         return "";
@@ -1322,7 +1322,7 @@ public sealed class FacebookEventImporter
             }
             else if (item.Type == "session" && item.Dance.Contains("Zouk"))
             {
-                item.Location = "Studio L'Império";
+                item.Location = "Studio Império";
             }
         }
     }

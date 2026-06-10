@@ -75,7 +75,7 @@ public static class EventStructuredDataWriter
         var graph = new List<object>
         {
             BuildPlace("https://pulsationdanse.ca/#studio-salsa-attitude", "Studio Salsa Attitude", "3188 Chemin Ste-Foy", "G1X 1R4"),
-            BuildPlace("https://pulsationdanse.ca/#studio-imperio", "Studio L'Império", "2323 Avenue Nérée-Tremblay", "G1K 3G8")
+            BuildPlace("https://pulsationdanse.ca/#studio-imperio", "Studio Império", "2323 Avenue Nérée-Tremblay", "G1K 3G8")
         };
 
         foreach (var item in events.OrderBy(item => item.Date).ThenBy(item => item.Title))
