@@ -143,6 +143,21 @@ window.PULSATION_EVENTS = {
       "imageAlt": ""
     },
     {
+      "title": "Brazilian Breeze Nights",
+      "url": "https://www.facebook.com/events/s/soiree-zouk-vibe/1497922759017307/?rdid=3f7PpuAqh5CjtplX\u0026share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1aAgtBSLia%2F#",
+      "date": "2026-06-26",
+      "endDate": "",
+      "time": "19h",
+      "location": "Studio Salsa Attitude",
+      "dance": [
+        "WCS",
+        "Zouk"
+      ],
+      "type": "soiree-locale",
+      "image": "assets/images/events/brazilian-breeze-nights-3.jpg",
+      "imageAlt": "Brazilian Breeze Nights"
+    },
+    {
       "title": "ZOUK fest de la St-Jean",
       "url": "https://www.facebook.com/events/2009543233778629",
       "date": "2026-06-26",
