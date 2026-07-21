@@ -169,6 +169,21 @@
       "type": "weekender",
       "image": "assets/images/events/zouk-fest-de-la-st-jean.jpg",
       "imageAlt": ""
+    },
+    {
+      "title": "Cours WCS / ZOUK",
+      "url": "https://www.facebook.com/events/2043298063243372/2043298083243370",
+      "date": "2026-07-29",
+      "endDate": "2026-08-03",
+      "time": "18h30",
+      "location": "Qu\u00E9bec",
+      "dance": [
+        "WCS",
+        "Zouk"
+      ],
+      "type": "session",
+      "image": "assets/images/events/cours-wcs-zouk.jpg",
+      "imageAlt": ""
     }
   ]
 }
