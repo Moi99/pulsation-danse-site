@@ -186,6 +186,21 @@
       "imageAlt": ""
     },
     {
+      "title": "Cours ZOUK/WCS",
+      "url": "https://www.facebook.com/events/1379250797698680/1379250801032013/",
+      "date": "2026-09-15",
+      "endDate": "",
+      "time": "18h30",
+      "location": "Qu\u00E9bec",
+      "dance": [
+        "WCS",
+        "Zouk"
+      ],
+      "type": "session",
+      "image": "assets/images/events/cours-zouk-wcs.jpg",
+      "imageAlt": ""
+    },
+    {
       "title": "Anniversaire ZOUK Qu\u00E9bec",
       "url": "https://www.facebook.com/events/s/zouk-quebec-anniversary/1401700822065075/",
       "date": "2026-10-09",
