@@ -184,6 +184,20 @@
       "type": "session",
       "image": "assets/images/events/cours-wcs-zouk.jpg",
       "imageAlt": ""
+    },
+    {
+      "title": "Anniversaire ZOUK Qu\u00E9bec",
+      "url": "https://www.facebook.com/events/s/zouk-quebec-anniversary/1401700822065075/",
+      "date": "2026-10-09",
+      "endDate": "2026-10-11",
+      "time": "20",
+      "location": "Qu\u00E9bec",
+      "dance": [
+        "Zouk"
+      ],
+      "type": "weekender",
+      "image": "assets/images/events/anniversaire-zouk-quebec.jpg",
+      "imageAlt": ""
     }
   ]
 }
